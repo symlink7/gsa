@@ -71,7 +71,7 @@ class UsersController extends Controller {
 
   function edit($args = array()) {
     $errors = array();
-    if ($this->validate_edit_form($_POST, "", 0) == 0) {
+    if ($this->validate_edit_form($_POST, 0) == 0) {
       $errors = $this->get_var("errors");
     }
     else if ($_POST["user_id"] != $_SESSION["user_id"] && // someone else's acc 

@@ -509,7 +509,7 @@ class ProjectsController extends Controller {
                 new Model($step_controllers[$step])
               );
 
-    if ($this->validate_edit_form(
+    if ($this->validate_project_edit_form(
         $vars, $step_controllers[$step]) == 0
       ) {
       $this->die_ajax();
@@ -551,7 +551,7 @@ class ProjectsController extends Controller {
     }
   }
 
-  function validate_edit_form($vars, $section, $check_permissions = 1) {
+  function validate_project_edit_form($vars, $section) {
     $errors = array();
     $missing = array();
 
@@ -578,7 +578,7 @@ class ProjectsController extends Controller {
       }
     }
     return 1;
-  } // validate_edit_form()
+  } // validate_project_edit_form()
 
   private function edit_update_button_perm($tudo) {
     $can_edit = 0;
