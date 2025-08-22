@@ -6,14 +6,14 @@ define('ADMIN_URL', "https://gsaprojects.acgov.org/index.php");
 define('EMAIL_SENDER', '"GSA" <cardel42@vps16809.dreamhostps.com>'); // admin@cardel42.dreamhosters.com>');
 
 define('HOME', dirname(__FILE__));
-define('LIBRARY', 'HOME'."/lib/");
-define('CLASSES', 'LIBRARY'."classes/");
-define('TEMPLATES', 'HOME'."/templates/");
-define('MODELS', 'HOME'."/models/");
-define('CONTROLLERS', 'HOME'."/controllers/");
-define('VIEWS', 'HOME'."/views/");
-define('CONFIG', 'HOME'."/config/");
-define('UPLOADS', 'HOME'."/../uploads/");
+define('LIBRARY', HOME."/lib/");
+define('CLASSES', LIBRARY."classes/");
+define('TEMPLATES', HOME."/templates/");
+define('MODELS', HOME."/models/");
+define('CONTROLLERS', HOME."/controllers/");
+define('VIEWS', HOME."/views/");
+define('CONFIG', HOME."/config/");
+define('UPLOADS', HOME."/../uploads/");
 define('UPLOADS_WEB', "uploads/");
 /*
 define(DB_HOST, "internal-db.s170385.gridserver.com");
