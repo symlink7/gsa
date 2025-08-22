@@ -4,8 +4,8 @@ ini_set('display_errors', 1);
 
 date_default_timezone_set("America/Los_Angeles");
 
-define(AUTH_KEY_PUBLIC, "pc5-Zx_7y4uDNTvF");
-define(AUTH_KEY_INT, "xyz_2Ndg34-CbHb-fdh");
+define('AUTH_KEY_PUBLIC', "pc5-Zx_7y4uDNTvF");
+define('AUTH_KEY_INT', "xyz_2Ndg34-CbHb-fdh");
 
 if (!isset($_POST) || !is_array($_POST)) {
   json_die("Invalid request.");
