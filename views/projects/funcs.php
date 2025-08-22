@@ -1,7 +1,7 @@
 <?
 class ProjectFuncs {
 // some static funcs for project views
-  function same_line_variables($tudo, $varnames) {
+  public static function same_line_variables($tudo, $varnames) {
     $arr = array();
     foreach ($varnames as $varname) {
       if (is_var_valid($tudo[$varname])) {
@@ -11,24 +11,24 @@ class ProjectFuncs {
     return $arr;
   }
 
-  function show_last_updated_time($status_arr) {
+  public static function show_last_updated_time($status_arr) {
     return (is_var_valid($status_arr["status_created_time"]) &&
       substr($status_arr["status_created_time"], 0, 4) != "0000"
         ? true : false);
   }
 
-  function show_last_approved_time($status_arr) {
+  public static function show_last_approved_time($status_arr) {
     return ($status_arr["status_approved"] == "Y" &&
       is_var_valid($status_arr["status_approved_time"]) &&
       substr($status_arr["status_approved_time"], 0, 4) != "0000"
         ? true : false);
   }
 
-  function format_datetime($date) {
+  public static function format_datetime($date) {
     return date("m/d/y, h:ia", strtotime($date));
   }
 
-  function status_colors($statuses) {
+  public static function status_colors($statuses) {
     return array(
       "color_o" => $statuses["overall"]["status_color"],
       "color_sco" => $statuses["scope"]["status_color"],
@@ -37,7 +37,7 @@ class ProjectFuncs {
     );
   }
   
-  function status_status($status_arr) {
+  public static function status_status($status_arr) {
     if ($status_arr["needs_update"] == "Y") {
       return "Needs Update";
     }
@@ -46,11 +46,11 @@ class ProjectFuncs {
         "Approved" : "Pending");
     }
   }
-  function format_budget($str, $default = "N/A") {
+  public static function format_budget($str, $default = "N/A") {
     return ($str ? "$".money_format("%!.0i", $str) : $default);
   }  
 
-  function building_info($building, $sep = " | ") {
+  public static function building_info($building, $sep = " | ") {
     $str = "";
     if (is_arr_valid($building)) {
       $address = array();
@@ -75,8 +75,8 @@ class ProjectFuncs {
   }
 
   // $options is optional because i only want to use get_var ONCE
-  // when accessing this function from a loop (like export_all)
-  function prepare_critical_activity($ca, $options = array()) {
+  // when accessing this public static function from a loop (like export_all)
+  public static function prepare_critical_activity($ca, $options = array()) {
     if (!is_arr_valid($options)) {
       $options = get_var("critical_activity_options", "project_statuses");
     }  

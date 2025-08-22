@@ -1,7 +1,7 @@
 <?
 class ExportFuncs {
 
-  function get_db_fields_all() {
+  public static function get_db_fields_all() {
     include(CONFIG."projects.php");
 
     $db_fields_all = $db_fields;
@@ -38,7 +38,7 @@ class ExportFuncs {
     return $db_fields_all;
   } // get_db_fields_all()
 
-  function get_fields() {
+  public static function get_fields() {
     $fields = array(
       "project_number", "project_name", "project_building",
       "dep_name", "project_type", "client_name", "client_list", 
@@ -63,7 +63,7 @@ class ExportFuncs {
     return $fields;
   } // get_fields
 
-  function filter_funcs($orig_fields, $include_fields) {
+  public static function filter_funcs($orig_fields, $include_fields) {
     $fields = array();
     foreach ($orig_fields as $varname) {
       if (in_array($varname, $include_fields)) {
