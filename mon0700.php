@@ -1,7 +1,9 @@
 <?php
-ini_set('error_reporting', "E_ALL ^ E_NOTICE");
+error_reporting(E_ALL & ~E_NOTICE);
 ini_set('display_errors', 1);
+
 date_default_timezone_set("America/Los_Angeles");
+
 // temporary, only when running the first time
 /*
 if ($argc < 4) {
@@ -9,6 +11,7 @@ if ($argc < 4) {
 }
 $today = mktime(0, 0, 0, $argv[2], $argv[1], $argv[3]);
 */
+
 $today = mktime();
 
 require_once(dirname(__FILE__)."/config.php");

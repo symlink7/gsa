@@ -1,11 +1,11 @@
 <?
 function set_reporting($dev = 0) {
   if ($dev) {
-    ini_set('error_reporting', "E_ALL ^ E_NOTICE");
+    error_reporting(E_ALL & ~E_NOTICE);
     ini_set('display_errors', 1);
   }
   else {
-    ini_set('error_reporting', "E_ALL ^ E_NOTICE");
+    error_reporting(E_ALL & ~E_NOTICE);
     ini_set('display_errors', 0);
     ini_set('log_errors', 1);
   }
