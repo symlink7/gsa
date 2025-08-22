@@ -43,7 +43,7 @@ class User extends Model {
               (user_id, user_login_time, user_login_ip)
               VALUES
               ('".(int)$this->_id."', 
-              now(), '".getenv(REMOTE_ADDR)."')";
+              now(), '".$_SERVER["REMOTE_ADDR"]."')";
     mysql_query($query) or die(mysql_error());
     
     // save the last login time and ip in user_info

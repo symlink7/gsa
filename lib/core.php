@@ -202,7 +202,7 @@ function check_for_missing($vars = array(), $req = array()) {
 } // end of check_for_missing
 
 function check_os() {
-  $agent = getenv("HTTP_USER_AGENT");
+  $agent = $_SERVER["HTTP_USER_AGENT"];
   if (preg_match("/Windows/", $agent))
     $os = "Windows";
   else if (preg_match("/Mac OS/", $agent))
