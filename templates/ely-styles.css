@@ -1,0 +1,27 @@
+.bulk-approve-button { 
+/* display: none; margin-left: 10pt; */
+  font-size: 10pt !important; 
+  width: 15%; min-width: 100pt;
+}
+
+#project-name-span { font-style: italic; font-weight: bold; }
+
+.infeed {
+  padding: 4px;
+  position: relative;
+  top: -22px;
+}
+
+.plug-off {
+  color: red;
+  background-color: #f0f0f0;
+}
+
+.plug-on {
+  color: #3ca61c;
+  background-color: #f0f0f0;
+}
+
+.public { color: green; }
+.ready { color: red; }
+

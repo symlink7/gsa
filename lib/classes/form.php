@@ -1,0 +1,162 @@
+<?
+class Form {
+
+  function row($label, $input_col, $border = true) {
+    $str = '
+      <div class="form-group"'.
+      ($border ? "" : ' style="border-top:0px;"').">
+        $label
+        $input_col
+      </div><!-- form group -->
+    ";
+    return $str;
+  }
+
+  function label($varname, $descr, $req = false) {
+    $str = '
+      <label class="col-sm-3 control-label"'.
+      ($req ? ' id="'.$varname.'_req"' : "").">".
+      $descr.
+      ($req ? ' <span style="color:red">*</span>' : "").'
+      </label>
+  ';
+    return $str;
+  }
+
+  function input_col($form_field) {
+    $str = '
+      <div class="col-sm-6">
+        '.$form_field.'
+      </div><!-- col-sm-6-->
+    ';
+    return $str;
+  }
+  
+  function textarea($varname, $value = "", 
+                    $extra_attr = "", $help_text = "") {
+    $str = '
+      <textarea name="'.$varname.'" id="'.$varname.
+      '" class="form-control" '.$extra_attr.'>'.
+      htmlspecialchars($value).'</textarea>
+    ';
+    return $str;
+  } // textarea()
+
+  function wysiwyg($varname, $value = "",
+                   $extra_attr = "", $help_text = "") {
+    $str = '
+      <textarea name="'.$varname.'" id="'.$varname.
+      '" class="ckeditor" '.$extra_attr.'>'.
+      htmlspecialchars($value).'</textarea>
+    ';
+    return $str;
+  } // textarea()
+
+
+  function textbox($varname, $value = "", 
+                   $extra_attr = "", $help_text = "") {
+    $str = '
+      <input type="text" name="'.$varname.'" id="'.$varname.
+      '" value="'.htmlspecialchars($value).'" class="form-control" '.
+      $extra_attr.'/>
+      '.($help_text != "" ? '<div class="help-block">'.$help_text.'</div>' : "");
+    return $str;
+  } // textbox()
+
+  function budget_box($varname, $value = "") {
+    $str = '
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" data-inputmask="&apos;mask&apos;:&apos;9{3,12}&apos;" class="input-mask form-control" name="'.$varname.'" id="'.$varname.
+        '" value="'.htmlspecialchars($value).'" />
+      </div><!-- .input-group -->
+    ';
+    return $str;
+  }
+
+  function select_from_rel_array($varname, $options, $val = "",
+                                 $class = "chosen-select") {
+    $str = '
+      <select name="'.$varname.'" class="'.$class.'">
+        <option value=""></option>
+        ';
+    if (is_arr_valid($options)) {
+      foreach($options as $option => $value) {
+        $str .= '
+        <option value="'.htmlspecialchars($option).'"'.
+          ($val != "" && $option == $val ? " selected" : "").
+        '>'.htmlspecialchars($value).'
+        </option>';
+      }
+    }
+    $str .= '
+      </select>
+    ';
+    return $str;
+  } // select_from_rel_array()    
+  
+  function select_from_array($varname, $options, $val = "",
+                                 $class = "chosen-select") {
+    $str = '
+      <select name="'.$varname.'" class="'.$class.'">
+        <option value=""></option>
+        ';
+    if (is_arr_valid($options)) {
+      foreach($options as $value) {
+        $str .= '
+        <option value="'.htmlspecialchars($value).'"'.
+          ($val != "" && $value == $val ? " selected" : "").
+        '>'.htmlspecialchars($value).'
+        </option>';
+      }
+    }
+    $str .= '
+      </select>
+    ';
+    return $str;
+  } // select_from_array()    
+
+  function select_from_id_name_array($varname, $options, $val = "",
+                                     $class = "chosen-select") {
+    $str = '
+      <select name="'.$varname.'" class="'.$class.'">
+        <option value=""></option>
+        ';
+    if (is_arr_valid($options)) {
+      foreach($options as $option) {
+        $str .= '
+        <option value="'.htmlspecialchars($option["id"]).'"'.
+          ($val != "" && $option["id"] == $val ? " selected" : "").
+        '>'.htmlspecialchars($option["name"]).'
+        </option>';
+      }
+    }
+    $str .= '
+      </select>
+    ';
+    return $str;
+  } // select_from_id_name_array()    
+
+  function checkboxes($varname, $options, $vals = array()) {
+    $str = "";
+    if (is_arr_valid($options)) {
+      foreach($options as $option => $value) {
+        $str .= '
+      <div class="checkbox">  
+        <label>
+          <input type="checkbox" name="'.$varname.'[]" value="'.
+            htmlspecialchars($option).'"'.
+          (is_arr_valid($vals) && in_array($option, $vals) ? 
+            " checked" : "").
+          '> '.($value).'
+        </label>
+      </div><!-- .checkbox -->
+      ';
+      }
+    }
+    return $str;
+  } // checkboxes()   
+
+} // Form class
+
+?>

@@ -1,0 +1,5 @@
+<?
+
+class BuildingsController extends Controller {
+
+}

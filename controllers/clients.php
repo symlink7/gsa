@@ -1,0 +1,5 @@
+<?
+
+class ClientsController extends Controller {
+
+}

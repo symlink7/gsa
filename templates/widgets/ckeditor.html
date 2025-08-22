@@ -1,0 +1,23 @@
+<!-- Ckeditor -->
+<script type="text/javascript" src="assets/widgets/ckeditor/ckeditor.js"></script>
+<script>
+  // This code is generally not necessary, but it is here to demonstrate
+  // how to customize specific editor instances on the fly.
+  // The "instanceCreated" event is fired for every editor instance created.
+  CKEDITOR.on('instanceCreated', function(event) {
+    var editor = event.editor;
+    editor.on('configLoaded', function() {
+      // Remove unnecessary plugins to make the editor simpler.
+      editor.config.removePlugins = 'document,find,flash,' +
+        'forms,iframe,image,newpage,maximize,insert,editing' +
+        'smiley,specialchar,templates,about';
+      // Rearrange the layout of the toolbar.
+      /*editor.config.toolbarGroups = [
+        { name: 'editing', groups: [ 'basicstyles', 'links' ] },
+        { name: 'undo' },
+        { name: 'clipboard',  groups: [ 'selection', 'clipboard' ] }
+      ];*/
+    }); // editor.on
+  }); // CKEDITOR.on
+</script>
+
