@@ -18,7 +18,7 @@
             <a href="index.php" title="GSA"><strong>ALAMEDA COUNTY GSA</strong><span> PROJECT STATUS DASHBOARD</span></a>
             <a href="index.php" class="logo-content-small" title="GSA">ALAMEDA COUNTY <i>GSA</i><span> PROJECT STATUS DASHBOARD</span></a>
             <? if (TEST_SITE) { ?>
-            <br /><h3 class="staging-header">STAGING SITE</h3>
+            <br /><h3 class="staging-header">STAGING SITE, using database '<?=DB_NAME?>'</h3>
             <? } ?>
           </div>
      
