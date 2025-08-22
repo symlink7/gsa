@@ -189,7 +189,7 @@ class Controller {
     return 1;
   } // validate_sub_add_form
 
-  protected function validate_edit_form($vars, $check_permissions = 1) {
+  protected function validate_edit_form($vars, $section = "", $check_permissions = 1) {
     if (is_file(CONFIG.$this->_controller_name.".php")) {
       include(CONFIG.$this->_controller_name.".php");
     }
