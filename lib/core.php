@@ -80,7 +80,7 @@ function format_date($date, $default = "N/A") {
 }
 
 function format_budget($str, $default = "N/A") {
-  return ($str ? "$".money_format("%!.0i", $str) : $default);
+  return ($str ? money_format("%!.0i", $str) : $default);
 }  
 
 function serialize_array($arr, $sep = "\n") {
@@ -226,3 +226,10 @@ function enclose_in_brackets($str) {
   return "(".$str.")";
 }
 
+function money_format($format, $number, $currency = 'USD') {
+  $fmt = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
+  if (strpos($format, '.0') !== false) {
+    $fmt->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
+  }
+  return $fmt->formatCurrency($number, $currency);
+}
