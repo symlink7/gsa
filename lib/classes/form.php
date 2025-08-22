@@ -1,7 +1,7 @@
 <?
 class Form {
 
-  function row($label, $input_col, $border = true) {
+  public static function row($label, $input_col, $border = true) {
     $str = '
       <div class="form-group"'.
       ($border ? "" : ' style="border-top:0px;"').">
@@ -12,7 +12,7 @@ class Form {
     return $str;
   }
 
-  function label($varname, $descr, $req = false) {
+  public static function label($varname, $descr, $req = false) {
     $str = '
       <label class="col-sm-3 control-label"'.
       ($req ? ' id="'.$varname.'_req"' : "").">".
@@ -23,7 +23,7 @@ class Form {
     return $str;
   }
 
-  function input_col($form_field) {
+  public static function input_col($form_field) {
     $str = '
       <div class="col-sm-6">
         '.$form_field.'
@@ -32,7 +32,7 @@ class Form {
     return $str;
   }
   
-  function textarea($varname, $value = "", 
+  public static function textarea($varname, $value = "", 
                     $extra_attr = "", $help_text = "") {
     $str = '
       <textarea name="'.$varname.'" id="'.$varname.
@@ -42,7 +42,7 @@ class Form {
     return $str;
   } // textarea()
 
-  function wysiwyg($varname, $value = "",
+  public static function wysiwyg($varname, $value = "",
                    $extra_attr = "", $help_text = "") {
     $str = '
       <textarea name="'.$varname.'" id="'.$varname.
@@ -53,7 +53,7 @@ class Form {
   } // textarea()
 
 
-  function textbox($varname, $value = "", 
+  public static function textbox($varname, $value = "", 
                    $extra_attr = "", $help_text = "") {
     $str = '
       <input type="text" name="'.$varname.'" id="'.$varname.
@@ -63,7 +63,7 @@ class Form {
     return $str;
   } // textbox()
 
-  function budget_box($varname, $value = "") {
+  public static function budget_box($varname, $value = "") {
     $str = '
       <div class="input-group">
         <span class="input-group-addon">$</span>
@@ -74,7 +74,7 @@ class Form {
     return $str;
   }
 
-  function select_from_rel_array($varname, $options, $val = "",
+  public static function select_from_rel_array($varname, $options, $val = "",
                                  $class = "chosen-select") {
     $str = '
       <select name="'.$varname.'" class="'.$class.'">
@@ -95,7 +95,7 @@ class Form {
     return $str;
   } // select_from_rel_array()    
   
-  function select_from_array($varname, $options, $val = "",
+  public static function select_from_array($varname, $options, $val = "",
                                  $class = "chosen-select") {
     $str = '
       <select name="'.$varname.'" class="'.$class.'">
@@ -116,7 +116,7 @@ class Form {
     return $str;
   } // select_from_array()    
 
-  function select_from_id_name_array($varname, $options, $val = "",
+  public static function select_from_id_name_array($varname, $options, $val = "",
                                      $class = "chosen-select") {
     $str = '
       <select name="'.$varname.'" class="'.$class.'">
@@ -137,7 +137,7 @@ class Form {
     return $str;
   } // select_from_id_name_array()    
 
-  function checkboxes($varname, $options, $vals = array()) {
+  public static function checkboxes($varname, $options, $vals = array()) {
     $str = "";
     if (is_arr_valid($options)) {
       foreach($options as $option => $value) {

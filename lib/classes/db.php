@@ -1,7 +1,7 @@
 <?
 class DB {
 
-  function get_id_name($args = array(), $return_first = false) {
+  public static function get_id_name($args = array(), $return_first = false) {
     $tudo = array();
     if (sizeof($args) < 1 || 
         !is_var_valid($args["model"]) ||
@@ -41,7 +41,7 @@ class DB {
     return $tudo;
   } // get_id_name
 
-  function get_fields($args = array(), $return_first = false) {
+  public static function get_fields($args = array(), $return_first = false) {
     $tudo = array();
     if (sizeof($args) < 1 ||
         !is_var_valid($args["model"]) ||
@@ -82,7 +82,7 @@ class DB {
     return $tudo;
   } // get_fields
 
-  function insert($table, $arr, $get_insert_id = false) {
+  public static function insert($table, $arr, $get_insert_id = false) {
     $field_names = array_keys($arr);
     $query = "INSERT INTO $table
              (".implode(", ", $field_names).")
@@ -97,7 +97,7 @@ class DB {
     }  
   } // insert
 
-  function query($query) {
+  public static function query($query) {
     $tudo = array();
     $res = mysql_query($query) or die(mysql_error());
     while ($row = mysql_fetch_assoc($res)) {

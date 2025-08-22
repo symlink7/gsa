@@ -1,7 +1,7 @@
 <?
 class Cron {
 
-  function tue_before_last_monday($today = "") {
+  public static function tue_before_last_monday($today = "") {
     if (!is_var_valid($today)) {
       $today = time();
     }
@@ -14,7 +14,7 @@ class Cron {
     }
   } // end of tue_before_last_monday()
 
-  function last_monday($today = "") {
+  public static function last_monday($today = "") {
     if (!is_var_valid($today)) {
       $today = time();
     }
@@ -27,7 +27,7 @@ class Cron {
     }
   } // last_monday()
 
-  function tue_after_last_monday($today = "") {
+  public static function tue_after_last_monday($today = "") {
     if (!is_var_valid($today)) {
       $today = time();
     }
@@ -44,7 +44,7 @@ class Cron {
     }
   } // last_monday()
 
-  function thu_after_last_monday($today = "") {
+  public static function thu_after_last_monday($today = "") {
     if (!is_var_valid($today)) {
       $today = time();
     }
@@ -61,7 +61,7 @@ class Cron {
     }
   } // last_monday()
 
-  function all_existing_projects() {
+  public static function all_existing_projects() {
     // a list of all completed existing projects
     $tudo = array();
     $query = "SELECT project_id FROM projects 
@@ -75,7 +75,7 @@ class Cron {
     return $tudo;  
   }
 
-  function all_project_managers() {
+  public static function all_project_managers() {
     // a list of all project managers with completed existing projects
     $tudo = array();
     $query = "
@@ -97,7 +97,7 @@ class Cron {
     return $tudo;
   }
 
-  function all_project_supervisors() {
+  public static function all_project_supervisors() {
     // a list of all project supervisors with completed existing projects
     $tudo = array();
     $query = "
@@ -119,7 +119,7 @@ class Cron {
     return $tudo;
   }
 
-  function expire_all_statuses($project_ids) {
+  public static function expire_all_statuses($project_ids) {
     $query = "UPDATE project_statuses
       SET status_needs_update='Y'
       WHERE 
@@ -133,7 +133,7 @@ class Cron {
     }
   }
 
-  function projects_by_flag($which) {
+  public static function projects_by_flag($which) {
     $tudo = array();
     $where = array(
       "p.project_deleted != 'Y'",
@@ -171,7 +171,7 @@ class Cron {
     return $tudo;
   } // end of projects_by_flag
 
-  function all_admin_users() {
+  public static function all_admin_users() {
     $tudo = array();
     $query = "
       SELECT 

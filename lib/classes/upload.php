@@ -1,7 +1,7 @@
 <?
 class Upload {
 
-  function is_file_valid($settings) {
+  public static function is_file_valid($settings) {
     $error_msg = "";
     extract($settings);
     
@@ -31,18 +31,18 @@ class Upload {
     return $error_msg;
   } // is_file_valid()
 
-  function file_extension($filename) {
+  public static function file_extension($filename) {
     $ext = strtolower(array_pop(explode(".", $filename)));
     return ($ext == "jpeg" ? "jpg" : $ext);
   }
 
-  function save_image($varname, $newname) {
+  public static function save_image($varname, $newname) {
     copy($_FILES[$varname]["tmp_name"], 
          UPLOADS."orig_images/".$newname);
     chmod(UPLOADS."orig_images/".$newname, 0777);
   }  
 
-  function resize_crop($settings, $newname) {
+  public static function resize_crop($settings, $newname) {
     extract($settings);
     
     require_once(CLASSES."image.php");

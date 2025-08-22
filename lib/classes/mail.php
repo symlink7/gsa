@@ -1,7 +1,7 @@
 <?
 class Mail {
 
-  function prepare_and_send($rcpt, $mail_template, $vars) {
+  public static function prepare_and_send($rcpt, $mail_template, $vars) {
     include(CONFIG."mail_templates.php");
     
     $headers = "From: ".EMAIL_SENDER;
@@ -19,7 +19,7 @@ class Mail {
     return $body;     
   } // end of prepare_and_send()
 
-  function populate_variables($body, $vars) {
+  public static function populate_variables($body, $vars) {
     // start over from the beginning every time
     while ($start = strpos($body, "##", 0)) {
       $end = strpos($body, "\##", $start);
