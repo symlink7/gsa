@@ -551,7 +551,7 @@ class ProjectsController extends Controller {
     }
   }
 
-  function validate_edit_form($vars, $section) {
+  function validate_edit_form($vars, $section, $check_permissions = 1) {
     $errors = array();
     $missing = array();
 
