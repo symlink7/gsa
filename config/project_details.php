@@ -25,7 +25,7 @@ $permissions = array(
 $add_form_req_fields = array(
   $var_pfx."phase",
   $var_pfx."percent_complete",
-  $var_pfx."category",
+//  $var_pfx."category",
 //  "current_activity_status_descr",
 //  "critical_activity_status_descr",
   "risk_status_descr",
