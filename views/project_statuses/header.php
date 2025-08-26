@@ -15,7 +15,7 @@ include(TEMPLATES."widgets/ckeditor.html");
 ?>
 <!-- ely's modal script -->
 <script type="text/javascript" src="platform/js/modals.js"></script>
-<script type="text/javascript" src="platform/js/forms_submit.js?v=<?=mktime()?>"></script>
+<script type="text/javascript" src="platform/js/forms_submit.js?v=<?=time()?>"></script>
 
         <div id="page-content-wrapper">
           <div id="page-content">

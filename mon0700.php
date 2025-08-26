@@ -9,10 +9,10 @@ date_default_timezone_set("America/Los_Angeles");
 if ($argc < 4) {
   die("Usage: php mon0700.php d m Y\n");
 }
-$today = mktime(0, 0, 0, $argv[2], $argv[1], $argv[3]);
+$today = time(0, 0, 0, $argv[2], $argv[1], $argv[3]);
 */
 
-$today = mktime();
+$today = time();
 
 require_once(dirname(__FILE__)."/config.php");
 require_once(LIBRARY."core.php");

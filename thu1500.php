@@ -11,7 +11,7 @@ if ($argc < 4) {
 }
 $today = mktime(0, 0, 0, $argv[2], $argv[1], $argv[3]);
 */
-$today = mktime();
+$today = time();
 
 require_once(dirname(__FILE__)."/config.php");
 require_once(LIBRARY."core.php");
