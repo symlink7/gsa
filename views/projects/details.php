@@ -163,7 +163,7 @@ extract($colors);
                           } 
                           ?>
                         </h7>
-                        <?=(is_var_valid($project_category) ? "<p><br /><h7>".
+                        <?=(is_var_valid($project_category) ? "<p><h7>".
                         add_tag($project_category, "strong")
                         ."</h7></p>" : "")?>
                       </div><!-- col-md-6 -->

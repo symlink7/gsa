@@ -12,7 +12,7 @@
                           );
                           
                           echo Form::row(
-                            Form::label("project_category", "Categories I - VI", true),
+                            Form::label("project_category", "Categories I - VI"),
                             Form::input_col(
                               Form::select_from_rel_array("project_category",
                                 $project_category_options, $project_category,
