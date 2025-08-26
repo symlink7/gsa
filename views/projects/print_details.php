@@ -30,6 +30,12 @@ $tudo["project_number_text"] =
 $tudo["project_district_name"] = 
   (is_var_valid($tudo["project_district"]) ?
     $project_district_options[$tudo["project_district"]] : "");
+
+$project_category_options = get_var("project_category_options", "project_details");
+$tudo["project_category"] = 
+  (is_var_valid($tudo["project_category"]) ? 
+    "Category ".$project_category_options[$tudo["project_category"]] : "");
+
 extract($tudo);
 
 $colors = ProjectFuncs::status_colors($statuses);
@@ -53,7 +59,7 @@ extract($colors);
                     <?
                     $arr = ProjectFuncs::same_line_variables($tudo,
                       array("department_name", "project_number_text", 
-                            "project_district_name", "project_type")
+                            "project_district_name", "project_type", "project_category")
                     );  
                     if (sizeof($arr) > 0) { ?>
                     <h6 class="pad10B"><?=implode(" | ", $arr)?></h6>
@@ -74,6 +80,8 @@ extract($colors);
                     <? } else { ?>
                     <h6 class="font-gray pad10B"></h6>
                     <? } ?>
+                    <?=(is_var_valid($project_category) ? '<h6 class="pad10B">'.
+                        $project_category."</h6>\n" : "")?>
                   </div><!-- page-title -->
                 </div><!--col-md-9 -->
               </div><!-- .row (print-only) -->

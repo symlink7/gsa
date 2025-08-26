@@ -13,6 +13,7 @@ $db_fields = array(
   $var_pfx."phase" => array("varchar", 64, "Project phase", 1, 1),
   $var_pfx."percent_complete" => array(
     "tinyint not null", "", "Percent complete", 1, 1),
+  $var_pfx."category" => array("set", "'1','2','3','4','5','6'", "Categories I - VI", 1, 1),
 );  
 
 $permissions = array(
@@ -24,6 +25,7 @@ $permissions = array(
 $add_form_req_fields = array(
   $var_pfx."phase",
   $var_pfx."percent_complete",
+  $var_pfx."category",
 //  "current_activity_status_descr",
 //  "critical_activity_status_descr",
   "risk_status_descr",
@@ -46,6 +48,15 @@ $project_phase_options = array(
   "Execution",
   "Hold Over",
   "Market Search",
+);
+
+$project_category_options = array(
+  "1" => "I",
+  "2" => "II",
+  "3" => "III",
+  "4" => "IV",
+  "5" => "V",
+  "6" => "VI",
 );
 
 $status_fields = array(/*"scope", */"overall", "current_activity", 

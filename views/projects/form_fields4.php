@@ -16,6 +16,17 @@ include(CONFIG."project_statuses.php");
                               )  
                             )
                           );
+
+                          echo Form::row(
+                            Form::label("project_category", "Categories I - VI", true),
+                            Form::input_col(
+                              Form::select_from_rel_array("project_category",
+                                $project_category_options, "",
+                                "custom-select"
+                              )
+                            )
+                          );
+
                           ?>
 
                           <div class="form-group">
@@ -73,4 +84,4 @@ include(CONFIG."project_statuses.php");
                               Form::wysiwyg("risk_status_descr")
                             )
                           );
-                          ?>  
+                          ?>

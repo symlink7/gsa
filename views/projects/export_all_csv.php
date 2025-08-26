@@ -24,6 +24,8 @@ $str .= implode("\t", $header_fields)."\n";
 $critical_activity_options = get_var(
   "critical_activity_options", "project_statuses"
 );
+$project_category_options = get_var("project_category_options", "project_details");
+
 // get encoding
 $os = check_os();
 switch ($os) {
@@ -48,6 +50,9 @@ foreach ($tudo as $project) {
       else if ($varname == "project_delivery_method") {
         $line[] = '"'.$delivery_method_options[$project[$varname]].'"';
       }
+      else if ($varname == "project_category") {
+        $line[] = '"'.$project_category_options[$project[$varname]].'"';
+      }  
       else {
         $line[] = prepare_field(
                     $project[$varname], 

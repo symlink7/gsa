@@ -26,6 +26,12 @@ include(TEMPLATES."widgets/dialog.html");
 $tudo["project_district_name"] = 
   (is_var_valid($tudo["project_district"]) ?
     $project_district_options[$tudo["project_district"]] : "");
+
+$project_category_options = get_var("project_category_options", "project_details");
+$tudo["project_category"] = 
+  (is_var_valid($tudo["project_category"]) ? 
+    "Category ".$project_category_options[$tudo["project_category"]] : "");
+
 extract($tudo);
 
 $colors = ProjectFuncs::status_colors($statuses);
@@ -157,6 +163,9 @@ extract($colors);
                           } 
                           ?>
                         </h7>
+                        <?=(is_var_valid($project_category) ? "<p><br /><h7>".
+                        add_tag($project_category, "strong")
+                        ."</h7></p>" : "")?>
                       </div><!-- col-md-6 -->
                     </div><!-- row -->
                   </div><!-- layout-box -->

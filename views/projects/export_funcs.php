@@ -54,7 +54,7 @@ class ExportFuncs {
       "date_intake", "date_cao_memo", "date_handover",
       "date_design_start", "date_construct_start",
       "date_completion_orig", "date_completion_revised",
-      "project_phase", "project_percent_complete",
+      "project_phase", "project_category", "project_percent_complete",
       "bos_action_status_descr", 
       "current_activity_status_descr",
       "critical_activity_status_descr","risk_status_descr"
