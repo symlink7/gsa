@@ -59,7 +59,7 @@ extract($colors);
                     <?
                     $arr = ProjectFuncs::same_line_variables($tudo,
                       array("department_name", "project_number_text", 
-                            "project_district_name", "project_type", "project_category")
+                            "project_district_name", "project_type")
                     );  
                     if (sizeof($arr) > 0) { ?>
                     <h6 class="pad10B"><?=implode(" | ", $arr)?></h6>
