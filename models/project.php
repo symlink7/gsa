@@ -274,6 +274,7 @@ class Project extends Model {
         b.budget_approved_orig,
         b.budget_approved_revised,
         pd.project_phase,
+        pd.project_category,
         cl.client_name,
         p.project_client_id,
         GROUP_CONCAT(DISTINCT c.client_name 
@@ -917,6 +918,7 @@ class Project extends Model {
          d.date_completion_revised, d.date_completion_orig)
       as date_completion,   
       det.project_phase, det.project_percent_complete,
+      det.project_category,
       if (b.budget_approved_revised is not null
       and b.budget_approved_revised != 0, b.budget_approved_revised, 
       b.budget_approved_orig) as budget
@@ -959,7 +961,7 @@ class Project extends Model {
         p.project_id = '".escape($project_id)."'" 
       : "")."  
       GROUP BY api.project_id".
-      (sizeof($where) > 0 ? "
+      (is_arr_valid($where) ? "
       HAVING
         ".implode("\nAND ", $where) : "")."  
       ORDER BY p.project_name";
@@ -975,7 +977,7 @@ class Project extends Model {
       if (array_key_exists($dm, $delivery_method_options)) {
         $row["project_delivery_method"] = $delivery_method_options[$dm];
       }  
-      $row["images"] = ($row["images"] != "" ? 
+      $row["images"] = (is_var_valid($row["images"]) ? 
         $this->public_images($row["images"]) : array()
       ); 
       $tudo[] = strip($row);

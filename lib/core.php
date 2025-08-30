@@ -12,13 +12,13 @@ function set_reporting($dev = 0) {
 }
 
 function strip($value) {
-  $value = is_arr_valid($value) ? 
+  $value = is_array($value) ? 
             array_map('strip', $value) : stripslashes($value);
   return $value;
 }
 
 function escape($value) {
-  $value = is_arr_valid($value) ? 
+  $value = is_array($value) ? 
             array_map('escape', $value) : mysql_escape_string($value);
   return $value;
 }
