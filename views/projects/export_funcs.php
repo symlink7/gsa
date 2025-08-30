@@ -57,7 +57,8 @@ class ExportFuncs {
       "project_phase", "project_category", "project_percent_complete",
       "bos_action_status_descr", 
       "current_activity_status_descr",
-      "critical_activity_status_descr","risk_status_descr"
+      "critical_activity_status_descr","risk_status_descr", 
+      "project_archived"
     ); 
     
     return $fields;

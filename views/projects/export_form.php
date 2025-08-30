@@ -74,6 +74,13 @@ $fields = ExportFuncs::get_fields();
                           </div><!-- form group -->
                           
                           <div class="form-group">
+                            <label class="col-sm-6 control-label"> 
+                              <input type="checkbox" name="include_archived" value="1">
+                              Include archived projects
+                            </label>
+                          </div>
+
+                          <div class="form-group">
                             <div class="col-sm-3">
                             </div>
                             <div class="col-sm-6">

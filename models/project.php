@@ -651,9 +651,10 @@ class Project extends Model {
       WHERE
         p.project_deleted != 'Y'
       AND
-        p.project_steps_completed = 4
-      AND
-        p.project_archived != 'Y'".
+        p.project_steps_completed = 4".
+// this should come from $where
+//      AND
+//        p.project_archived != 'Y'".
       (sizeof($where) > 0 ? "
       AND 
         ".implode("\nAND ", $where) : "").
@@ -662,7 +663,7 @@ class Project extends Model {
         p.project_id = '".escape($project_id)."'" : "")."
       GROUP BY p.project_id
       ORDER BY ".($order ? "$order, " : "")."p.project_building";
-
+    
     if (!($res = mysql_query($query))) {
       // echo "$query: ".mysql_error();
       $this->_error_msg = mysql_error();

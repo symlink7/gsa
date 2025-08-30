@@ -660,6 +660,9 @@ class ProjectsController extends Controller {
         $arr = neutralize($_POST["project_department_arr"]);
         $params["where"] = array("p.project_department in (".implode(", ", $arr).")");
         $params["order"] = "d.dep_name";
+        if (!is_var_valid($_POST["include_archived"])) {
+          $params["where"][] = "p.project_archived != 'Y'";
+        }  
       }
       // change the action name to something 
       // that is not a method of ProjectsController
@@ -669,7 +672,10 @@ class ProjectsController extends Controller {
         $this->set_var("error_msg", "No matching projects were found.");
         $this->set_var("generic_template", "error.php");
       }  
-      else { 
+      else {
+        if (is_var_valid($_POST["include_archived"])) {
+          $_POST["include_fields"][] = "project_archived";
+        }  
         $this->_template = new Template($this->_controller_name, "export_all_csv");
         $this->set_var("tudo", $this->{$this->_model_name}->export_all($params));
         $this->set_var("include_fields", $_POST["include_fields"]);
