@@ -33,7 +33,21 @@ function panel_body($statuses, $buttons, $project_id) {
           "project_statuses", 
           "critical_activity_options"
       );
-    }      
+    } 
+    if ($status_type == "bos_action") {
+      extract(split_critical_activity(
+        $status_info["status_descr"],
+        $bos_action_options,
+        true)
+      );
+      $status_info["status_descr"] =
+        options_to_ul(
+          ($ca_old ? $ca_old : implode("||", $ca_checked)),
+          // $status_info["status_descr"],
+          "project_statuses",
+          "bos_action_options"
+      );
+    }
     $status_name = strtoupper($project_status_names[$status_type]);
     $str .= '
                     <h3 class="content-box-header clearfix font-size-14 pad0A mrg0B">

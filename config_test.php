@@ -3,7 +3,7 @@ date_default_timezone_set("America/Los_Angeles");
 set_time_limit(0);
 
 define('TEST_SITE', 1);
-define('ADMIN_URL', "https://gsaprojects.acgov.org/index.php");
+define('ADMIN_URL', "https://carriedelucchi.com/gsa-test/index.php");
 define('EMAIL_SENDER', '"GSA" <cardel42@vps16809.dreamhostps.com>'); // admin@cardel42.dreamhosters.com>');
 
 define('HOME', dirname(__FILE__));

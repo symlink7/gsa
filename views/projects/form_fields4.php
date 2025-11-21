@@ -54,7 +54,10 @@ include(CONFIG."project_statuses.php");
                             Form::label("bos_action_status_descr", 
                                         "BOS Action", true),
                             Form::input_col(
-                              Form::wysiwyg("bos_action_status_descr")
+                              // Form::wysiwyg("bos_action_status_descr")
+                              Form::checkboxes("bos_action",
+                                $bos_action_options).
+                              '<input type="textbox" name="bos_action[]" />'
                             )
                           );                         
 

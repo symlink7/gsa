@@ -177,7 +177,7 @@ foreach ($arr as $status_name) {
                         <div class="status-printer panel-body bg-white">
                           <div class="row">
                             <h3 class="pad10B">
-                              <?=$project_status_names["$status_name"]?>
+                              <?=$project_status_names[$status_name]?>
                             </h3>
                             <p>
                               <?=($status_arr["status_color"] ?
@@ -193,15 +193,28 @@ if (ProjectFuncs::show_last_updated_time($status_arr)) { ?>
                               </span>
 <? } ?>
                             </p>
-                            <?
-                            $statuses["critical_activity"]["status_descr"] =
-                              options_to_ul(
-                                ProjectFuncs::prepare_critical_activity(
-                                  $statuses["critical_activity"]["status_descr"]
-                                ),
-                                "project_statuses", 
-                                "critical_activity_options"
-                              );  
+                            <? 
+                            if ($status_name == "critical_activity") {
+                              $status_arr["status_descr"] =
+                                options_to_ul(
+                                  ProjectFuncs::prepare_critical_activity(
+                                    $status_arr["status_descr"]
+                                  ),
+                                  "project_statuses", 
+                                  "critical_activity_options"
+                                ); 
+														}
+                            if ($status_name == "bos_action") {
+                              $status_arr["status_descr"] =
+															  options_to_ul(
+																  ProjectFuncs::prepare_critical_activity(
+																	  $status_arr["status_descr"],
+                           				  get_var("bos_action_options", "project_statuses")
+																  ),
+																  "project_statuses",
+																  "bos_action_options"
+															  );
+                            }
                             if (!$status_arr["status_color"]) {
                               if (substr(trim($status_arr["status_descr"]), 0, 1) 
                                   == '<') {

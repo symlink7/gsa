@@ -28,7 +28,11 @@ function modal_update_content($project_info, $status_info, $edit = false) {
       $status_info["status_descr"], $critical_activity_options)
     );
   }
-  
+  else if ($status_type == "bos_action") {
+    extract(split_critical_activity(
+      $status_info["status_descr"], $bos_action_options)
+    );
+  }  
   $str .= '
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -100,18 +104,31 @@ function modal_update_content($project_info, $status_info, $edit = false) {
           ($ca_other ? htmlentities($ca_other) : "").'" />
           '
           : // if it's not critical activity 
-          Form::wysiwyg(
-            $status_type.'_status_descr', // $varname
-            $status_info["status_descr"]
-          ).
-          "<script>CKEDITOR.replace('".$status_type.'_status_descr'."');
-          </script>"
-        ) // end of critical activity vs other statuses
+          ($status_type == "bos_action" ?
+            Form::checkboxes(
+              "bos_action",
+              $bos_action_options,
+              $ca_checked
+            ).
+            '
+            <input type="textbox" name="bos_action[]" value="'.
+              ($ca_other ? htmlentities($ca_other) : "").'" />
+            '
+            : // if it's not bos_action
+            Form::wysiwyg(
+              $status_type.'_status_descr', // $varname
+              $status_info["status_descr"]
+            ).
+            "<script>CKEDITOR.replace('".$status_type.'_status_descr'."');
+            </script>"
+          ) // end of bos_action vs other statuses
+        )
         : ""
       ). // end of if it's descr-only status field
       ($edit ? "" : ' 
           <div class="checkbox'.
-            ($status_type == "critical_activity" ? " after-checkboxes" : "").'">
+            ($status_type == "critical_activity" || $status_type == "bos_action" ? 
+              " after-checkboxes" : "").'">
             <label>
               <input type="checkbox" name="notify_approver" value="1">
               Please notify approver

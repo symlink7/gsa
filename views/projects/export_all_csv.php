@@ -21,9 +21,8 @@ foreach ($fields as $varname) {
 
 $str .= implode("\t", $header_fields)."\n";
 
-$critical_activity_options = get_var(
-  "critical_activity_options", "project_statuses"
-);
+$critical_activity_options = get_var("critical_activity_options", "project_statuses");
+$bos_action_options = get_var("bos_action_options", "project_statuses");
 $project_category_options = get_var("project_category_options", "project_details");
 
 // get encoding
@@ -83,6 +82,18 @@ foreach ($tudo as $project) {
               "project_statuses", 
               "critical_activity_options"
             );  
+        }
+
+        else if ($status_name == "bos_action") {
+          $project["statuses"][$status_name]["status_descr"] =
+            options_to_cdl(
+              ProjectFuncs::prepare_critical_activity(
+                $project["statuses"][$status_name]["status_descr"],
+                $bos_action_options
+              ),
+              "project_statuses",
+              "bos_action_options"
+            );
         }
 
         $line[] = prepare_field(

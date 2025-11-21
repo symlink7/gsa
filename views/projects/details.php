@@ -196,6 +196,15 @@ extract($colors);
                     <div class="width-100" style="padding-bottom:30px;">
                     </div>
                     <?
+                    $statuses["bos_action"]["status_descr"] =
+                    	options_to_ul(
+                      	ProjectFuncs::prepare_critical_activity(
+                        	$statuses["bos_action"]["status_descr"],
+                          get_var("bos_action_options", "project_statuses")
+                        ),
+                        "project_statuses",
+                        "bos_action_options"
+                      );
                     echo text_status_div("BOS Action",
                       $statuses["bos_action"],
                       '<i class="glyph-icon icon-status-light-blue icon-legal" title=".icon-legal"></i>'

@@ -171,6 +171,11 @@ class Project_statusesController extends Controller {
       $_POST["critical_activity_status_descr"] =
         checkboxes_to_string($_POST["critical_activity"]);
     }
+    else if ($this->status_info["status_type"] == "bos_action" &&
+      is_arr_valid($_POST["bos_action"])) {
+        $_POST["bos_action_status_descr"] =
+          checkboxes_to_string($_POST["bos_action"]);
+    }
 
     $missing = missing_fields($_POST, $req);
     if (sizeof($missing) > 0) {
@@ -229,7 +234,12 @@ class Project_statusesController extends Controller {
       $_POST["critical_activity_status_descr"] =
         checkboxes_to_string($_POST["critical_activity"]);
     }    
-
+    else if ($this->status_info["status_type"] == "bos_action" &&
+        is_arr_valid($_POST["bos_action"])) {
+      $_POST["bos_action_status_descr"] =
+        checkboxes_to_string($_POST["bos_action"]);
+    }
+    
     $missing = missing_fields($_POST, $req);
     if (sizeof($missing) > 0) {
       $this->set_var("missing", $missing);

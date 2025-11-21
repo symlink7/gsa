@@ -79,6 +79,13 @@ $critical_activity_options = array(
   "other" => "Other: ",
 );
 
+$bos_action_options = array(
+  "amend" => "Amend",
+  "award" => "Award",
+  "add_to_cip" => "Add to CIP Capital Improvement Plan",
+  "other" => "Other: ",
+);  
+
 $project_status_names = array(
   'budget' => "Budget",
   // 'scope' => "Scope",
