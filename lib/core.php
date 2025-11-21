@@ -127,6 +127,9 @@ function round_up($n) {
 function checkboxes_to_string($arr) {
   $arr = array_map('stripslashes', 
           array_map('escape', $arr));
+  if (empty($arr[sizeof($arr)-1])) {
+    array_pop($arr);
+  }
   return (is_arr_valid($arr) ? implode("||", $arr) : $arr);
 }
 

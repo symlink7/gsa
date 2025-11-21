@@ -100,7 +100,7 @@ function modal_update_content($project_info, $status_info, $edit = false) {
             $ca_checked
           ).
           '
-          <input type="textbox" name="critical_activity[]" value="'.
+          <input type="text" name="critical_activity[]" value="'.
           ($ca_other ? htmlentities($ca_other) : "").'" />
           '
           : // if it's not critical activity 
@@ -111,7 +111,7 @@ function modal_update_content($project_info, $status_info, $edit = false) {
               $ca_checked
             ).
             '
-            <input type="textbox" name="bos_action[]" value="'.
+            <input type="text" name="bos_action[]" value="'.
               ($ca_other ? htmlentities($ca_other) : "").'" />
             '
             : // if it's not bos_action

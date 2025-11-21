@@ -167,11 +167,11 @@ class Project_statusesController extends Controller {
 
     // transform critical_activity here
     if ($this->status_info["status_type"] == "critical_activity" &&
-        is_arr_valid($_POST["critical_activity"])) {
-      $_POST["critical_activity_status_descr"] =
-        checkboxes_to_string($_POST["critical_activity"]);
+      is_arr_valid($_POST["critical_activity"])) {
+        $_POST["critical_activity_status_descr"] =
+          checkboxes_to_string($_POST["critical_activity"]);
     }
-    else if ($this->status_info["status_type"] == "bos_action" &&
+    else if ($this->status_info["status_type"] == "bos_action" && 
       is_arr_valid($_POST["bos_action"])) {
         $_POST["bos_action_status_descr"] =
           checkboxes_to_string($_POST["bos_action"]);
@@ -184,7 +184,7 @@ class Project_statusesController extends Controller {
     }  
     
     $vars = array_merge($this->status_info, $_POST);
-    
+
     if ($this->{$this->_model_name}->update_status($vars) == 0) {
       $error_msg = $this->{$this->_model_name}->get_error_msg();
       if ($error_msg == "") {
