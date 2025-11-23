@@ -77,31 +77,42 @@ class ProjectFuncs {
   // $options is optional because i only want to use get_var ONCE
   // when accessing this public static function from a loop (like export_all)
   public static function prepare_critical_activity($ca, $options = array()) {
+    // exit early with an empty string if ca is empty
+    if (!is_var_valid($ca)) {
+      return "";
+    }
+
     if (!is_arr_valid($options)) {
       $options = get_var("critical_activity_options", "project_statuses");
     }  
     // if it's the new type of c_a and more than one option
     if (preg_match("/\|\|/", $ca)) {
+      $remove_other = 0;
       $ca_checked = explode("||", $ca);
       $arr = array();
       foreach ($ca_checked as $val) {
+        if (!is_var_valid(trim($val))) {
+          continue;
+        }  
         if (array_key_exists($val, $options)) {
-          if ($val != "other") { // skip other
-            $arr[] = $val;
-          }
+          $arr[] = $val;
         }
         else { // must be the other option
-          $arr[] = "Other: $val";
+          $arr[] = "Other: ".strip_tags($val);
+          $remove_other = 1;
         }
       }
       $ca_checked = $arr;
+      if ($remove_other > 0) {
+        $ca_checked = remove_element_by_value("other", $ca_checked);
+      }
       return implode("||", $ca_checked);
     }
-    else if (array_key_exists($val, $options)) {
+    else if (array_key_exists($ca, $options)) {
       return $ca;
     }
     else {
-      return "Other: $ca";
+      return "Other: ".strip_tags($ca);
     }  
   } // prepare_critical_activity()
 

@@ -100,7 +100,7 @@ function modal_update_content($project_info, $status_info, $edit = false) {
             $ca_checked
           ).
           '
-          <input type="text" name="critical_activity[]" value="'.
+          <input type="text" name="critical_activity_other" value="'.
           ($ca_other ? htmlentities($ca_other) : "").'" />
           '
           : // if it's not critical activity 
@@ -111,7 +111,7 @@ function modal_update_content($project_info, $status_info, $edit = false) {
               $ca_checked
             ).
             '
-            <input type="text" name="bos_action[]" value="'.
+            <input type="text" name="bos_action_other" value="'.
               ($ca_other ? htmlentities($ca_other) : "").'" />
             '
             : // if it's not bos_action
@@ -190,43 +190,60 @@ function split_critical_activity($ca,
     // we need $ca_other for the checkbox version
     // for the ul version we need everything in ca_checked
     $ca_other = "";
-    
+    $remove_other = 0;
+
+    // exit early if ca is empty
+    if (!is_var_valid($ca)) {
+      return (compact("ca_checked", "ca_other"));
+    }
+
     // if it's the new type of c_a and more than one option
     if (preg_match("/\|\|/", $ca)) {
+      $arr = array();
       $ca_checked = explode("||", $ca);
-      if (!$ul) { // for the checkboxes
-        foreach ($ca_checked as $val) {
-          if (!array_key_exists($val, $critical_activity_options)) {
-            $ca_other = $val;
+      foreach ($ca_checked as $val) {
+        if (!is_var_valid(trim($val))) {
+          continue;
+        }  
+        if (!$ul) { // for the checkboxes
+          if (!array_key_exists($val, $critical_activity_options)) { 
+            $ca_other = strip_tags($val);
           }
-        }
-      } 
-      else { // for the ul list
-        $arr = array();
-        foreach ($ca_checked as $val) {
+        } 
+        else { // for the ul list
           if (array_key_exists($val, $critical_activity_options)) {
-            if ($val != "other") { // skip other
-              $arr[] = $val;
-            }
+            $arr[] = $val;
           }
           else { // must be the other option
-            $arr[] = "Other: $val";
+            $arr[] = "Other: ".strip_tags($val);
+            $remove_other = 1;
           }
-        }
-        $ca_checked = $arr;
-      }  // end of with other for the ul list
+          $ca_checked = $arr;
+        }  // end of with other for the ul list
+      }  
     }
     // no || can mean only one option was checked
-    else if (in_array($ca, $critical_activity_options)) {
-      $ca_checked = array($ca);
+    else if (array_key_exists($ca, $critical_activity_options)) {
+      $ca_checked[] = $ca;
     }
     else { // it's other without a checked-other or the old c_a
       if ($ul) {
-        $ca_checked = array("Other: $ca");
+        $ca_checked[] = "Other: ".strip_tags($ca);
       }
-      else { 
-        $ca_other = $ca;
+      else {
+        $ca_other = strip_tags($ca);
       }  
     }
+    if (!$ul) {
+      if (is_var_valid($ca_other) && !in_array("other", $ca_checked)) {
+        $ca_checked[] = "other";
+      }
+      //else if (!is_var_valid($ca_other) && in_array("other", $ca_checked)) {
+      //  $ca_checked = remove_element_by_value("other", $ca_checked);
+      //}
+    }
+    else if ($remove_other > 0) {
+      $ca_checked = remove_element_by_value("other", $ca_checked);
+    }  
     return (compact("ca_checked", "ca_other"));
-} 
+}

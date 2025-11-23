@@ -57,7 +57,7 @@ include(CONFIG."project_statuses.php");
                               // Form::wysiwyg("bos_action_status_descr")
                               Form::checkboxes("bos_action",
                                 $bos_action_options).
-                              '<input type="text" name="bos_action[]" />'
+                              '<input type="text" name="bos_action_other" />'
                             )
                           );                         
 
@@ -76,7 +76,7 @@ include(CONFIG."project_statuses.php");
                               // Form::wysiwyg("critical_activity_status_descr")
                               Form::checkboxes("critical_activity", 
                                 $critical_activity_options).
-                              '<input type="text" name="critical_activity[]" />' 
+                              '<input type="text" name="critical_activity_other" />' 
                             )
                           );  
                           

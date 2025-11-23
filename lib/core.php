@@ -229,6 +229,16 @@ function enclose_in_brackets($str) {
   return "(".$str.")";
 }
 
+function remove_element_by_value($val, $arr) {
+  $arr2 = array();
+  foreach($arr as $el) {
+    if ($el != $val) {
+      $arr2[] = $el;
+    }
+  }
+  return $arr2;
+}
+
 function money_format($format, $number, $currency = 'USD') {
   $fmt = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
   if (strpos($format, '.0') !== false) {

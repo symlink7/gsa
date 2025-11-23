@@ -87,20 +87,36 @@ class ProjectsController extends Controller {
       include(CONFIG.$this->_controller_name.".php");
       $model = new Model($step_controllers[$step]);
 
-      // transform critical_activity here
+      // project statuses
       if ($step == 4) {
+        // transform critical_activity here
         if (is_arr_valid($critical_activity)) {
+          if (in_array("other", $critical_activity) &&
+            is_var_valid($critical_activity_other)) {
+              $critical_activity[] = strip_tags($critical_activity_other);
+          }  
           $_POST["critical_activity_status_descr"] =
             $critical_activity_status_descr = 
               checkboxes_to_string($critical_activity);
         }
-        if (is_arr_valid($bos_action)) {
-          if (is_arr_valid($bos_action)) {
-            $_POST["bos_action_status_descr"] =
-              $bos_action_status_descr = 
-                checkboxes_to_string($bos_action);
-          }
+        else {
+          $_POST["critical_activity_status_descr"] =
+            $critical_activity_status_descr = "";
         }
+
+        if (is_arr_valid($bos_action)) {
+          if (in_array("other", $bos_action) &&
+            is_var_valid($bos_action_other)) {
+              $bos_action[] = strip_tags($bos_action_other);
+          }  
+          $_POST["bos_action_status_descr"] =
+            $bos_action_status_descr = 
+              checkboxes_to_string($bos_action);
+        }
+        else {
+          $_POST["bos_action_status_descr"] =
+            $bos_action_status_descr = "";
+        }    
       }  
       if ($this->validate_steps_add_form(
         $_POST, $step_controllers[$step]) == 0

@@ -16,6 +16,7 @@ $db_fields = array(
     "set", "'budget','scope','schedule','overall','current_activity','critical_activity','risk','bos_action'", "Status type", 0, 0),
   $var_pfx."color" => array(
     "set", "'green', 'yellow', 'red'", "Status color", 1, 1, "green"),
+  $var_pfx."action_date" => array("text", "", "Action date", 1, 1),
   $var_pfx."descr" => array("text", "", "Status explanation", 1, 1),
   $var_pfx."approved" => array("set", "'Y','N'", "Approved", 1, 1, "N"),
   $var_pfx."needs_update" => array("set", "'Y','N'", "Needs Update", 1, 1, "N"),
@@ -55,7 +56,7 @@ $update_req_fields = array(
   "risk" => array("risk_status_descr"),
   "current_activity" => array(),
   "critical_activity" => array(),
-  "bos_action" => array("bos_action_status_descr"),
+  "bos_action" => array(),
 );  
 
 $critical_activity_options = array(

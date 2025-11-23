@@ -166,17 +166,12 @@ class Project_statusesController extends Controller {
     $req = $update_req_fields[$this->status_info["status_type"]];
 
     // transform critical_activity here
-    if ($this->status_info["status_type"] == "critical_activity" &&
-      is_arr_valid($_POST["critical_activity"])) {
-        $_POST["critical_activity_status_descr"] =
-          checkboxes_to_string($_POST["critical_activity"]);
-    }
-    else if ($this->status_info["status_type"] == "bos_action" && 
-      is_arr_valid($_POST["bos_action"])) {
-        $_POST["bos_action_status_descr"] =
-          checkboxes_to_string($_POST["bos_action"]);
-    }
 
+    if ($this->status_info["status_type"] == "critical_activity" ||
+				$this->status_info["status_type"] == "bos_action") {
+			$this->checkboxes_to_descr($this->status_info["status_type"]);
+		}
+    
     $missing = missing_fields($_POST, $req);
     if (sizeof($missing) > 0) {
       $this->set_var("missing", $missing);
@@ -229,15 +224,9 @@ class Project_statusesController extends Controller {
     $req = $update_req_fields[$this->status_info["status_type"]];
 
     // transform critical_activity here
-    if ($this->status_info["status_type"] == "critical_activity" &&
-        is_arr_valid($_POST["critical_activity"])) {
-      $_POST["critical_activity_status_descr"] =
-        checkboxes_to_string($_POST["critical_activity"]);
-    }    
-    else if ($this->status_info["status_type"] == "bos_action" &&
-        is_arr_valid($_POST["bos_action"])) {
-      $_POST["bos_action_status_descr"] =
-        checkboxes_to_string($_POST["bos_action"]);
+    if ($this->status_info["status_type"] == "critical_activity" ||
+        $this->status_info["status_type"] == "bos_action") {
+      $this->checkboxes_to_descr($this->status_info["status_type"]);
     }
     
     $missing = missing_fields($_POST, $req);
@@ -429,5 +418,21 @@ class Project_statusesController extends Controller {
     $this->set_var("generic_template", "success_ajax.php");
     $this->render();
   } // bulk_approve()
+
+	private static function checkboxes_to_descr($status_type) {
+  	if (is_arr_valid($_POST[$status_type])) {
+    	if (in_array("other", $_POST[$status_type]) &&
+      	is_var_valid($_POST[$status_type."_other"])) {
+        	$_POST[$status_type][] = 
+          	strip_tags($_POST[$status_type."_other"]);
+      }
+      $_POST[$status_type."_status_descr"] =
+      	checkboxes_to_string($_POST[$status_type]);
+    }
+    else {
+      $_POST[$status_type] = "";
+    }
+	}
+
 } // end of Project_statusController Class
 
