@@ -157,6 +157,24 @@ class Form {
     return $str;
   } // checkboxes()   
 
+  public static function date_field($varname, $value = "") {
+    $value = ($value == "0000-00-00" ? "" : $value);
+    $str = '
+                            <div class="col-sm-6">
+                              <div class="input-prepend input-group">
+                                <span class="add-on input-group-addon">
+                                  <i class="glyph-icon icon-calendar"></i>
+                                </span>
+                                <input type="text" name="'.$varname.'"'.
+                                ' id="'.$varname.'" class="bootstrap-datepicker'.
+                                ' form-control" value="'.$value.'"'.
+                                ' style="width:100px;">
+                              </div><!-- input-group -->
+                            </div><!-- col sm 6-->
+    ';
+    return $str;
+  } // date_field 
+
 } // Form class
 
 ?>

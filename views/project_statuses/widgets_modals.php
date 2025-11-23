@@ -57,7 +57,7 @@ function modal_update_content($project_info, $status_info, $edit = false) {
         </div>
         <div id="update-status-success-msg" class="alert alert-success" style="display:none"></div>
         ';
-  if ($status_info["status_color"] != "") { 
+  if ($status_info["status_color"] != "") {
     $str .= '
         <div class="form-group pad20B">
           '.Form::label(
@@ -78,6 +78,25 @@ function modal_update_content($project_info, $status_info, $edit = false) {
         </div><!-- .form-group -->
     ';
   } // end of status has color
+
+  // add the date picket field for BOS Action
+  if ($status_type == "bos_action") {
+    $str .= '
+        <div class="form-group clear">
+      '.
+      Form::label("status_action_date",
+        "When does this go to the board?",
+        (in_array("status_action_date", 
+          $update_req_fields[$status_type]) ? true : false
+        ) // $req
+      ).
+      Form::input_col(
+        Form::date_field("status_action_date", $status_action_date)
+      ).'
+        </div><!-- .form-group -->
+    ';
+  }
+
   $str .= '
         <div class="form-group clear">
           '.
@@ -153,9 +172,8 @@ function modal_update_content($project_info, $status_info, $edit = false) {
 } // modal_update
 
 function modal_update($edit = false) {
-  $str = '
-<div class="modal fade gsa-modal" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabel" aria-hidden="true">
-';
+  $str = '<div class="modal fade gsa-modal" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabel" aria-hidden="true">
+  ';
   $str2 = '
   <div class="modal-dialog">
     <div class="modal-content">
