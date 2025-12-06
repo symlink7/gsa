@@ -18,6 +18,7 @@ class Project_statusesController extends Controller {
     }
     else {
       $tudo = $this->{$this->_model_name}->project_info($args[0]);
+      
       if (sizeof($tudo) < 1) {
         $error_msg = $this->{$this->_model_name}->get_error_msg();
       }
@@ -176,9 +177,21 @@ class Project_statusesController extends Controller {
     if (sizeof($missing) > 0) {
       $this->set_var("missing", $missing);
       $this->die_ajax("Some required fields are missing.");
+    } 
+
+    if ($this->status_info["status_type"] == "bos_action" &&
+      is_var_valid($_POST["status_action_date"])) {
+      if (!valid_date($_POST["status_action_date"])) {
+        $missing[] = "status_action_date";
+        $this->set_var("missing", $missing);
+        $this->die_ajax("Invalid date or format.<br />".
+          "Valid date format: YYYY-mm-dd.<br />".
+          "Valid year range: from 2000 to current year + 20"
+        );
+      }
     }  
-    
-    $vars = array_merge($this->status_info, $_POST);
+
+    $vars = array_merge($this->status_info, $_POST); 
 
     if ($this->{$this->_model_name}->update_status($vars) == 0) {
       $error_msg = $this->{$this->_model_name}->get_error_msg();
@@ -234,7 +247,19 @@ class Project_statusesController extends Controller {
       $this->set_var("missing", $missing);
       $this->die_ajax("Some required fields are missing.");
     }  
-    
+
+    if ($this->status_info["status_type"] == "bos_action" &&
+      is_var_valid($_POST["status_action_date"])) {
+      if (!valid_date($_POST["status_action_date"])) {
+        $missing[] = "status_action_date"; 
+        $this->set_var("missing", $missing);
+        $this->die_ajax("Invalid date or format.<br />".
+          "Valid date format: YYYY-mm-dd.<br />".
+          "Valid year range: from 2000 to current year + 20"
+				);
+      }
+    }  
+
     $vars = array_merge($this->status_info, $_POST);
     
     if ($this->{$this->_model_name}->edit_status($vars) == 0) {
@@ -435,4 +460,3 @@ class Project_statusesController extends Controller {
 	}
 
 } // end of Project_statusController Class
-

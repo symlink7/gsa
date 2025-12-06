@@ -59,7 +59,11 @@ class Project_status extends Model {
       "status_approved_time" => "",
       "status_approver_id" => "",
     );
-    
+
+    if ($status_type == "bos_action") {
+      $fields["status_action_date"] = $status_action_date;
+    }
+
     if ($this->update($fields)) {
       $this->set_info($status_id);
       $fields = $this->get_info();
@@ -73,6 +77,7 @@ class Project_status extends Model {
           "status_approved_time", "status_approver_id"
         )
       );
+      
       $insert_id = DB::insert("project_statuses_archive", $fields);
       return 1;
     }
@@ -104,6 +109,11 @@ class Project_status extends Model {
       "status_approved_time" => "now()",
       "status_approver_id" => $_SESSION["user_id"],
     );
+
+    if ($status_type == "bos_action") {
+      $fields["status_action_date"] = $status_action_date;
+    }
+
     if ($this->update($fields)) {
       $this->set_info($status_id);
       $fields = $this->get_info();
@@ -117,6 +127,7 @@ class Project_status extends Model {
           "status_approved_time", "status_approver_id"
         )
       );
+      
       $insert_id = DB::insert("project_statuses_archive", $fields);
       return 1;
     }

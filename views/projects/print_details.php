@@ -216,12 +216,20 @@ if (ProjectFuncs::show_last_updated_time($status_arr)) { ?>
 															  );
                             }
                             if (!$status_arr["status_color"]) {
+                              if ($status_arr["status_type"] == "bos_action" &&
+                                is_var_valid($status_arr["status_action_date"])) { ?>
+                            <p>When does this go to the board?  
+                              <b><?=format_date($status_arr["status_action_date"], "", "Y-m-d");?></b>
+                            </p>
+                              <?
+                              }
+                              
                               if (substr(trim($status_arr["status_descr"]), 0, 1) 
                                   == '<') {
                                 echo $status_arr["status_descr"];
                               } 
                               else { 
-                            ?>
+                            ?>   
                             <p><?=$status_arr["status_descr"]?></p>
                             <? 
                               } 

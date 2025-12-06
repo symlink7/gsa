@@ -1,4 +1,6 @@
 <?
+define('DEBUG_MODE', 0);
+
 function set_reporting($dev = 0) {
   if ($dev) {
     error_reporting(E_ALL & ~E_NOTICE);
@@ -71,10 +73,68 @@ function valid_password($str) {
   }
 }
 
-function format_date($date, $default = "N/A") {
+function valid_date($date) {
+  $arr = explode("-", $date);
+
+  if (sizeof($arr) != 3) {
+    debug_print('sizeof($arr) != 3'); 
+    return false;
+  }
+  
+  $year = $arr[0];
+  $month = $arr[1];
+  $day = $arr[2];
+
+  if (strlen($year) != 4 || strlen($month) != 2 || strlen($day) != 2) {
+    debug_print('strlen($year) != 4 || strlen($month) != 2 || strlen($day) != 2'); 
+    return false;
+  }
+
+  $year = (int)$year;
+  if ($year < 2000 || $year > date("Y") + 20) {
+    debug_print('$year < 2000 || $year > date("Y") + 20');
+    return false;
+  }
+
+  $month = (int)$month;
+  if ($month < 1 || $month > 12) {
+    debug_print('$month < 1 || $month > 12');
+    return false;
+  }
+
+  $day = (int)$day;
+  if ($day < 1 || $day > 31) {
+    debug_print('$day < 1 || $day > 31');
+    return false;
+  }
+  if (in_array($month, array(4, 6, 9, 11)) && $day > 30) {
+    debug_print('in_array($month, array(4, 6, 9, 11)) && $day > 30');
+    return false;
+  }
+  if ($month == 2) {
+    if ($year % 4 > 0 && $day > 28) {
+      debug_print('$month == 2 && $year % 4 > 0 & $day > 28');
+      return false;
+    }
+    else if ($day > 29) {
+      debug_print('$month == 2 && $day > 29');
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function debug_print($error_msg) {
+  if (DEBUG_MODE) {
+    print("$error_msg\n");
+  }
+}
+
+function format_date($date, $default = "N/A", $format = "m-d-y") {
   $str = $default;
   if (is_var_valid($date) && $date != "0000-00-00") {
-    $str = date("m-d-y", strtotime($date));
+    $str = date($format, strtotime($date));
   }
   return $str;
 }

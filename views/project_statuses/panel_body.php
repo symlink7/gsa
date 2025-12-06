@@ -14,7 +14,7 @@ function panel_body($statuses, $buttons, $project_id) {
     "overall", /*"scope",*/ "budget", "schedule",
   );
 
-  foreach($status_types as $status_type) {
+  foreach ($status_types as $status_type) {
     if (!array_key_exists($status_type, $statuses)) {
       continue;
     }  
@@ -77,6 +77,13 @@ function panel_body($statuses, $buttons, $project_id) {
     $str .= '                  
                       </span>
                     </h3>
+                    '.($status_type=="bos_action" ? '
+                    <p>
+                      When does this go to the board? 
+                      <b>'.
+                      format_date($status_info["status_action_date"], "", "Y-m-d").
+                      '</b>
+                    </p>' : "").'
                     <p>
                       '.(!$status_info["status_color"] ?
                       $status_info["status_descr"] : "");

@@ -17,6 +17,7 @@ class ExportFuncs {
       "client_name" => $db_fields_all["project_client_id"],
       "client_list" => array("text", "", "Client(s)"),
       "bos_action_status_descr" => array("text", "", "BOS Action"),
+      // "bos_action_status_action_date" => array("text", "", "BOS Action Date"),
       "budget_status_color" => array(0, 0, "Budget status"),
     //  "budget_status_descr" => array(0, 0, "Budget status explanation"), 
       "schedule_status_color" => array(0, 0, "Schedule status"), 

@@ -79,19 +79,16 @@ function modal_update_content($project_info, $status_info, $edit = false) {
     ';
   } // end of status has color
 
-  // add the date picket field for BOS Action
+  // add the date picker field for BOS Action
   if ($status_type == "bos_action") {
     $str .= '
         <div class="form-group clear">
       '.
       Form::label("status_action_date",
-        "When does this go to the board?",
-        (in_array("status_action_date", 
-          $update_req_fields[$status_type]) ? true : false
-        ) // $req
+        "When does this go to the board?", "false" 
       ).
       Form::input_col(
-        Form::date_field("status_action_date", $status_action_date)
+        Form::date_field("status_action_date", $status_info["status_action_date"])
       ).'
         </div><!-- .form-group -->
     ';

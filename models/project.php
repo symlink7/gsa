@@ -71,6 +71,12 @@ class Project extends Model {
           "status_approved_time" => "now()",
           "status_approver_id" => $_SESSION["user_id"],
         );
+
+        if ($status_type == "bos_action" && 
+          is_var_valid($vars["status_action_date"])) {
+          $fields["status_action_date"] = "'".$vars["status_action_date"]."'";
+        }
+
         $resp = DB::insert("project_statuses", $fields, true);
         if (!preg_match("/^[0-9]{5,12}$/", $resp)) {
           $this->set_error_msg($resp);

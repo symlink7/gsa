@@ -33,7 +33,7 @@ $add_form_req_fields = array(
 //  "scope_status_descr",
   "overall_status",
 //  "overall_status_descr",
-  "bos_action_status_descr",
+//  "bos_action_status_descr",
 );  
 
 $project_phase_options = array(

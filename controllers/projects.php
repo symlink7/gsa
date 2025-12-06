@@ -134,6 +134,7 @@ class ProjectsController extends Controller {
       }
 
       // insert eventual statuses
+
       if ($this->{$this->_model_name}->add_statuses(
         $step_controllers[$step], $_POST) == 0
       ) {

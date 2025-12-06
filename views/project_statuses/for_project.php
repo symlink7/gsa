@@ -10,7 +10,6 @@ extract($tudo);
                     <a href="index.php?q=projects/details/<?=$project_id?>"><?=$project_name?></a>
                   </h3>
                 </div><!-- panel-heading -->
-                
                 <?=panel_body($statuses, $buttons, $project_id); ?>
               </div><!-- panel -->
 

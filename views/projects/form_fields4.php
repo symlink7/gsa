@@ -1,6 +1,7 @@
 <? 
 include(CONFIG."project_details.php"); 
 include(CONFIG."project_statuses.php");
+include(TEMPLATES."widgets/datepicker.html");
 ?>                          
                           <input type="hidden" name="project_id" value="<?=$project_id?>" />
                           <?
@@ -52,7 +53,7 @@ include(CONFIG."project_statuses.php");
                           
                           echo Form::row(
                             Form::label("bos_action_status_descr", 
-                                        "BOS Action", true),
+                                        "BOS Action", false),
                             Form::input_col(
                               // Form::wysiwyg("bos_action_status_descr")
                               Form::checkboxes("bos_action",
@@ -60,6 +61,14 @@ include(CONFIG."project_statuses.php");
                               '<input type="text" name="bos_action_other" />'
                             )
                           );                         
+
+      										echo Form::row(
+														Form::label("status_action_date",
+        											"BOS Action: When does this go to the board?", false),
+      											Form::input_col(
+        											Form::date_field("status_action_date")
+														)
+													);	
 
                           echo Form::row(
                             Form::label("current_activity_status_descr", 
