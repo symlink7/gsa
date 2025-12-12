@@ -17,7 +17,7 @@ class ExportFuncs {
       "client_name" => $db_fields_all["project_client_id"],
       "client_list" => array("text", "", "Client(s)"),
       "bos_action_status_descr" => array("text", "", "BOS Action"),
-      // "bos_action_status_action_date" => array("text", "", "BOS Action Date"),
+      "bos_action_status_action_date" => array("text", "", "BOS Action - date"),
       "budget_status_color" => array(0, 0, "Budget status"),
     //  "budget_status_descr" => array(0, 0, "Budget status explanation"), 
       "schedule_status_color" => array(0, 0, "Schedule status"), 
@@ -57,6 +57,7 @@ class ExportFuncs {
       "date_completion_orig", "date_completion_revised",
       "project_phase", "project_category", "project_percent_complete",
       "bos_action_status_descr", 
+      "bos_action_status_action_date",
       "current_activity_status_descr",
       "critical_activity_status_descr","risk_status_descr", 
       "project_archived"

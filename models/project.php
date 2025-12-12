@@ -698,6 +698,7 @@ class Project extends Model {
       SELECT ps.status_type, 
         ps.status_color,
         ps.status_descr,
+        ps.status_action_date,
         p.project_id
       FROM project_statuses as ps
       LEFT JOIN projects as p

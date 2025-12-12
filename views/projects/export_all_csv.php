@@ -62,15 +62,19 @@ foreach ($tudo as $project) {
     }
     else { // if it's a status field
       if (preg_match("/\_status\_color/", $varname)) {
-        $status_name = preg_replace(
-          "/\_status\_color/", "", $varname);
+        $status_name = preg_replace("/\_status\_color/", "", $varname);
         $line[] = '"'.ucfirst(
           $project["statuses"][$status_name]["status_color"]
         ) .'"';
       }
+      else if ($varname == "bos_action_status_action_date") {
+        $status_name = "bos_action";
+        $line[] = 
+          format_date($project["statuses"][$status_name]["status_action_date"],
+            "", "Y-m-d");
+      }
       else if (preg_match("/\_status\_descr/", $varname)) {
-        $status_name = preg_replace(
-          "/\_status\_descr/", "", $varname);
+        $status_name = preg_replace("/\_status\_descr/", "", $varname);
         
         if ($status_name == "critical_activity") {
           $project["statuses"][$status_name]["status_descr"] =        
