@@ -165,7 +165,14 @@ class Project_imagesController extends Controller {
     }
     
     $filename = $_FILES[$image_settings["varname"]]["name"];
-    if ($this->{$this->_model_name}->add($args[0], $filename) == 0) {
+    
+    $vars = array(
+      "project_id" => $args[0],
+      "image_orig_filename" => $filename,
+      "image_infeed" => "'N'",
+    );
+
+    if ($this->{$this->_model_name}->add($vars) == 0) {
       $error_msg = $this->{$this->_model_name}->get_error_msg();
       if ($error_msg == "") {
         $error_msg = "Unable to save image info into the database.";

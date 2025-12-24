@@ -3,6 +3,7 @@ ini_set('memory_limit', '64M');
 class image {
   var $filename;
   var $newfilename;
+  var $img_type;
   var $fileext;
   var $curw;
   var $curh;
@@ -16,19 +17,21 @@ class image {
   var $newimgrc;
   var $x;
   var $y;
+  var $error = 0;
 
-  function image ($filename, $newfilename, $maxw, $maxh, $main_limit=""){
+  public function __construct($filename, $newfilename, $maxw, $maxh, $main_limit = "both"){
     $this->filename = $filename;
     $this->newfilename = $newfilename;
     $this->maxw = $maxw;
     $this->maxh = $maxh;
     $this->main_limit = $main_limit;
+    $this->get_imagetype();
+    // $this->get_extension();
   }
 
   function resize(){
     $this->get_image_info();
     $this->calculate_new_size();
-    $this->get_extention();
     $this->open_image();
     $this->resize_image();
     $this->save_image();
@@ -37,7 +40,6 @@ class image {
   function crop(){
     $this->get_image_info();
     $this->new_thumb_size();
-    $this->get_extention();
     $this->open_image();
     $this->crop_image();    
     $this->save_image();
@@ -47,7 +49,8 @@ class image {
     $this->filename = $filename;
     $this->newfilename = $filename;   
     $this->get_image_info();
-    $this->get_extention();
+    $this->get_imagetype();
+    // $this->get_extension();
     $this->open_image();
     
     $fb_size = getimagesize($fb_img);
@@ -63,7 +66,6 @@ class image {
 
   function rotate($angle){
     $this->get_image_info();
-    $this->get_extention();
     $this->open_image();
     $this->newimgrc = imagerotate($this->oldimgrc, $angle, 1);  
     $this->save_image();
@@ -133,13 +135,25 @@ class image {
     }
   }
 
-  function get_extention(){
+  function get_extension(){
     $temp = explode(".", $this->filename);
     $last = sizeof($temp) - 1;
     $this->fileext = strtolower($temp[$last]);
   }        
 
-  function open_image(){
+  function get_imagetype() {
+    $img_type = exif_imagetype($this->filename);
+    $types = array(1 => "gif", 2 => "jpg", 3 => "png");
+    if (!array_key_exists($img_type, $types)) {
+      $this->error = 1;
+    }
+    else {
+      $this->img_type = $types[$img_type];
+      $this->fileext = $types[$img_type];
+    }  
+  }
+
+  function open_image() {
     if ($this->fileext=="jpg" || $this->fileext=="jpeg")
       $this->oldimgrc = imagecreatefromjpeg($this->filename);
     else if ($this->fileext=="gif")
@@ -148,12 +162,12 @@ class image {
       $this->oldimgrc = imagecreatefrompng($this->filename);
   }
 
-  function resize_image(){
+  function resize_image() {
     $this->newimgrc = imagecreatetruecolor($this->neww, $this->newh);
     imagecopyresampled($this->newimgrc, $this->oldimgrc, 0, 0, 0, 0, $this->neww, $this->newh, $this->curw, $this->curh);
   }
 
-  function new_thumb_size(){
+  function new_thumb_size() {
     if ($this->curh > $this->maxh)
       $this->y = round(($this->curh / 2) - ($this->maxh / 2));
     else
@@ -165,19 +179,19 @@ class image {
       $this->x = 0;
   }
 
-  function crop_image(){
+  function crop_image() {
     $this->newimgrc = imagecreatetruecolor($this->maxw, $this->maxh);
     imagecopy($this->newimgrc, $this->oldimgrc, 0, 0, $this->x, $this->y, $this->curw, $this->curh);
     $this->oldimgrc = $this->newimgrc;
     
   }
 
-  function save_image(){
-    if ($this->fileext=="jpg" || $this->fileext=="jpeg")
+  function save_image() {
+    if ($this->fileext == "jpg" || $this->fileext == "jpeg")
       imagejpeg($this->newimgrc, $this->newfilename, 100);
-    else if ($this->fileext=="png")
+    else if ($this->fileext == "png")
       imagepng($this->newimgrc, $this->newfilename);
-    else if ($this->fileext=="gif")
+    else if ($this->fileext == "gif")
       imagegif($this->newimgrc, $this->newfilename);
     imagedestroy($this->newimgrc);
     imagedestroy($this->oldimgrc);

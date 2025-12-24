@@ -32,12 +32,7 @@ class Project_image extends Model {
     return $tudo;
   } // project_info
 
-  function add($project_id, $filename) {
-    $vars = array(
-      "project_id" => $project_id,
-      "image_orig_filename" => $filename,
-      "image_infeed" => "'N'",
-    );
+  function add($vars) {
     if ($this->insert(escape($vars)) == 0) {
       return 0;
     }

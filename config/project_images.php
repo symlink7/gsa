@@ -30,6 +30,7 @@ $image_settings = array(
   "max_size" => 2, // 2 mb
   "max_width" => 480,
   "max_height" => 480,
+  "dsize" => "both",
   "thumb_width" => 135,
   "thumb_height" => 135,
   "crop" => 1,

@@ -37,7 +37,7 @@ class Upload {
   }
 
   public static function save_image($varname, $newname) {
-    copy($_FILES[$varname]["tmp_name"], 
+    move_uploaded_file($_FILES[$varname]["tmp_name"], 
          UPLOADS."orig_images/".$newname);
     chmod(UPLOADS."orig_images/".$newname, 0777);
   }  
@@ -50,7 +50,7 @@ class Upload {
     if ($max_width) {
       $imgrc = new image(UPLOADS."orig_images/".$newname, 
                          UPLOADS."images/".$newname,
-                         $max_width, $max_height, $dside);
+                         $max_width, $max_height, $dsize);
       $imgrc->resize();
     }  
     else {
@@ -63,7 +63,7 @@ class Upload {
                          UPLOADS."thumbs/".$newname, 
                          $thumb_width, 
                          $thumb_height,
-                         $crop ? "crop" : $dside); 
+                         $crop ? "crop" : $dsize); 
       $imgrc->resize();
       if ($crop) {
         $imgrc = new image(UPLOADS."thumbs/".$newname,
