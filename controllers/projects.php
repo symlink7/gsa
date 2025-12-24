@@ -680,15 +680,15 @@ class ProjectsController extends Controller {
       $this->set_var("generic_template", "error.php");
     }
     else {
-      $param = array();
+      $params = array("where" => array(), "order" => "");
       if (is_arr_valid($_POST) && is_arr_valid($_POST["project_department_arr"])
         && !in_array("all", $_POST["project_department_arr"])) {
         $arr = neutralize($_POST["project_department_arr"]);
         $params["where"] = array("p.project_department in (".implode(", ", $arr).")");
         $params["order"] = "d.dep_name";
-        if (!is_var_valid($_POST["include_archived"])) {
-          $params["where"][] = "p.project_archived != 'Y'";
-        }  
+      }  
+      if (!is_var_valid($_POST["include_archived"])) {
+        $params["where"][] = "p.project_archived != 'Y'";
       }
       // change the action name to something 
       // that is not a method of ProjectsController
