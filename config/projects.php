@@ -12,7 +12,7 @@ $db_fields = array(
     "int auto_increment", "", "Project ID", 0, 0, "primary"),
   $var_pfx."name" => array("varchar", 128, "Project Name", 1, 1),
   $var_pfx."building" => array("int", "", "Building Number", 1, 1),
-  $var_pfx."number" => array("int", "", "Project Number", 1, 1),
+  $var_pfx."number" => array("varchar", "16", "Project Number", 1, 1),
   $var_pfx."descr" => array("text", "", "Project Description", 1, 1),
   $var_pfx."department" => array(
     "int not null", "", "Project Department", 1, 1, 
@@ -43,7 +43,7 @@ $permissions = array(
   "add" => array("A", "S"),
   "view_all" => array("A", "S", "M"),
   "view_mine" => array("A", "S", "M"),
-  "view_approved" => array("A", "D"),
+  "view_approved" => array("A", "S", "M", "D"),
   "export_all" => array("A", "S", "M"),
   "details" => array(),
   "edit" => array("A", "S", "M"),
@@ -115,6 +115,7 @@ $delivery_method_options = array(
   "PUR" => "Purchase",
   "SA" => "Sales Agreement",
   "DIS" => "Disposition",
+  "PRDB" => "Progressive D/B",
   "IDSO" => "IDSO",
   "TBD" => "TBD",
   "NA" => "N/A"

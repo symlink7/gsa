@@ -20,7 +20,11 @@
                           echo Form::row(
                             Form::label("project_number", "Project Number"),
                             Form::input_col(
-                              Form::textbox("project_number", $project_number)
+                              Form::textbox(
+                                "project_number", 
+                                $project_number,
+                                'maxlength="16" '
+                              )
                             )
                           );
                           
@@ -50,7 +54,7 @@
 
                           <div class="form-group">
                             <?=Form::label("project_clients", 
-                              "Choose client(s)")?>
+                              "Add Joint Clients")?>
                             <div class="col-sm-6">
                               <select name="project_clients_arr[]" multiple 
                                 data-placeholder="Click to see available options."

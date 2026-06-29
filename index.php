@@ -34,7 +34,7 @@ if ($session->get_session_on() == 0) {
 }  
 
 // check url and call_hook
-$q = (is_var_valid($_GET["q"]) ? strip($_GET["q"]) : "users/home");
+$q = (is_var_valid($_GET["q"]) ? strip($_GET["q"]) : "projects/view_approved");
 if (($error_msg = call_hook($q)) != "") {
   include(TEMPLATES."error.php");
 }

@@ -10,9 +10,9 @@ $order_by = $primkey;
 $db_fields = array(
   $primkey => array( 
     "int not null", "", "Project ID", 0, 0, "foreign", "projects(project_id)"),
-  $var_pfx."phase" => array("varchar", 64, "Project phase", 1, 1),
+  $var_pfx."phase" => array("varchar", 64, "Project Phase", 1, 1),
   $var_pfx."percent_complete" => array(
-    "tinyint not null", "", "Percent complete", 1, 1),
+    "tinyint not null", "", "Percent Complete", 1, 1),
   $var_pfx."category" => array("set", "'1','2','3','4','5','6'", "Categories I - VI", 1, 1),
 );  
 

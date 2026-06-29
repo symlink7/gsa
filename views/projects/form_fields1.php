@@ -18,12 +18,21 @@
 
                           echo Form::row(
                             Form::label("project_number", "Project Number"),
-                            Form::input_col(Form::textbox("project_number"))
+                            Form::input_col(
+                              Form::textbox(
+                                "project_number", 
+                                "", 
+                                'maxlength="16" '
+                              )
+                            )
                           );
 
                           echo Form::row(
-                            Form::label("project_department", 
-                              "Project Department", true),
+                            Form::label(
+                              "project_department", 
+                              "Project Department", 
+                              true
+                            ),
                             Form::input_col(
                               Form::select_from_id_name_array(
                                 "project_department", $departments
@@ -44,7 +53,7 @@
                           ?>
                           
                           <div class="form-group">
-                            <label class="col-sm-3 control-label">Choose client(s)</label>
+                            <label class="col-sm-3 control-label">Add Joint Clients</label>
                             <div class="col-sm-6">
                               <select name="project_clients_arr[]" multiple 
                                 data-placeholder="Click to see available options."

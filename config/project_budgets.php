@@ -10,8 +10,8 @@ $order_by = $primkey;
 $db_fields = array(
   $primkey => array( 
     "int not null", "", "Project ID", 0, 0, "foreign", "projects(project_id)"),
-  $var_pfx."approved_orig" => array("bigint", "", "Board-Approved Original Budget", 1, 1),
-  $var_pfx."approved_revised" => array("bigint", "", "Board-Approved Revised Budget", 1, 1),
+  $var_pfx."approved_orig" => array("bigint", "", "CAO Original Budget", 1, 1),
+  $var_pfx."approved_revised" => array("bigint", "", "Board Approved Revised Budget", 1, 1),
   $var_pfx."available" => array("bigint", "", "Available Budget", 1, 1),
 );  
 

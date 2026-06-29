@@ -27,7 +27,7 @@ include(TEMPLATES."widgets/data_tables.html");
                               <th>Bldg. No.</th>
                               <th>Project Type</th>
                               <th>Project Department</td>
-                              <th>Client</th>
+                              <th>Joint Clients</th>
                               <th>Project Manager</th>
                               <th>Status</th>
                             </tr>

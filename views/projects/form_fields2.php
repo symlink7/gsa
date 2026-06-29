@@ -2,7 +2,7 @@
                           <?
                           echo Form::row(
                             Form::label("budget_approved_orig", 
-                              "Board Approved Original Budget"),
+                              "CAO Original Budget"),
                             Form::input_col(
                               Form::budget_box("budget_approved_orig") 
                             ), false /* no border */

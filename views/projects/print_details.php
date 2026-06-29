@@ -141,7 +141,7 @@ extract($colors);
                         <h5 class="pad10B">BUDGET</h5>
                         <p>
                           <? setlocale(LC_MONETARY, 'en_US'); ?>
-                          <span class="font-size-10">Board Approved Original Budget:</span>
+                          <span class="font-size-10">CAO Original Budget:</span>
                           <?=format_budget($budget_approved_orig)?>
                           <br />
                           <span class="font-size-10">Board Approved Revised Budget:</span>

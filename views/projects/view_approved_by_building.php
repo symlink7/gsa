@@ -32,7 +32,7 @@ setlocale(LC_MONETARY, 'en_US');
                           <th>Project Name</th>
                           <th>Project Number</th>
                           <th>District</th>
-                          <th>Client</th>
+                          <th>Joint Clients</th>
                           <th>Project Phase</th>
                           <th aria-controls="datatable-tabletools">CBA Budget</th>
                         </tr>

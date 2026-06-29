@@ -254,7 +254,7 @@ extract($colors);
                         </h6>
                         <? setlocale(LC_MONETARY, 'en_US'); ?>
                         <p class="date-budget">
-                          Board Approved Original Budget:
+                          CAO Original Budget:
                           <strong>
                             <?=format_budget($budget_approved_orig)?>
                           </strong>

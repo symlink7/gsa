@@ -2,7 +2,7 @@
                           <? 
                           $project_phase_options[] = "Complete";
                           echo Form::row(
-                            Form::label("project_phase", "Project phase", true),
+                            Form::label("project_phase", "Project Phase", true),
                             Form::input_col(
                               Form::select_from_array("project_phase",
                                 $project_phase_options, $project_phase,
@@ -25,7 +25,7 @@
 
                           <div class="form-group">
                             <?=Form::label("project_percent_complete", 
-                              "Percent complete", true)?>
+                              "Percent Complete", true)?>
                             <div class="col-sm-6">
                               <select name="project_percent_complete"
                                 class="chosen-select">

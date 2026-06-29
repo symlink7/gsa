@@ -2,3 +2,5 @@ alter table `project_details` add column project_category set('1','2','3','4','5
 alter table `project_statuses_archive` add column status_action_date date after status_color;
 alter table `project_statuses` add column status_action_date date after status_color;
 
+ALTER TABLE `projects` CHANGE `project_number` `project_number` VARCHAR(16) NULL DEFAULT NULL;
+

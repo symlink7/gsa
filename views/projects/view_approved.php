@@ -22,7 +22,7 @@ setlocale(LC_MONETARY, 'en_US');
                 <h2><?=(!$color ? 
                   "GSA Project Status Dashboard" :
                   'Projects with <span class="font-'.$color.'">'.
-                  $color.' status</span>')?></h2>
+                  strtoupper($color).' Status</span>')?></h2>
               </div><!--Page Title-->
                 
               <?
@@ -114,7 +114,7 @@ setlocale(LC_MONETARY, 'en_US');
                           <th>District</th>
                           <th>Project Type</th>
                           <th>Project Department</th>
-                          <th>Client</th>
+                          <th>Joint Clients</th>
                           <th>Project Phase</th>
                           <th aria-controls="datatable-tabletools">CBA Budget</th>
                         </tr>

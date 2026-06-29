@@ -25,15 +25,20 @@ class UsersController extends Controller {
           if ($arr[0] == "q" && is_var_valid($arr[1])) {
             header("Location: {$index}.php?".$_POST["q"]);
             exit;
-          }  
+          } 
+          else {
+            header("Location: {$index}.php?q=projects/view_approved");
+            exit;
+          }
         }
         // Director's front page
-        if ($_SESSION["user_info"]["user_role"] == "D") {
+        //if ($_SESSION["user_info"]["user_role"] == "D") {
+        else {
           header("Location: {$index}.php?q=projects/view_approved");
           exit;
         }
         // display home instead of login
-        $this->_template = new Template($this->_controller_name, "home");
+        #$this->_template = new Template($this->_controller_name, "home");
       }
       else {
         // show login form with an error
@@ -47,7 +52,9 @@ class UsersController extends Controller {
 
   public function home($args = array()) {
     // set some variables only
-    $this->render();
+    // $this->render();
+    header("Location: index.php?q=projects/view_approved");
+    exit;
   }
 
   public function edit_form($args = array()) {
