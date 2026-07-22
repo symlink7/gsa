@@ -56,7 +56,7 @@ $update_req_fields = array(
   "risk" => array("risk_status_descr"),
   "current_activity" => array(),
   "critical_activity" => array(),
-  "bos_action" => array(),
+  "bos_action" => array("bos_action_status_descr"),
 );  
 
 $critical_activity_options = array(
@@ -84,6 +84,7 @@ $bos_action_options = array(
   "amend" => "Amend",
   "award" => "Award",
   "add_to_cip" => "Add to CIP Capital Improvement Plan",
+  "no_letter" => "No Board Letter",
   "other" => "Other: ",
 );  
 

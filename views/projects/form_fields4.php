@@ -53,7 +53,7 @@ include(TEMPLATES."widgets/datepicker.html");
                           
                           echo Form::row(
                             Form::label("bos_action_status_descr", 
-                                        "BOS Action", false),
+                                        "BOS Action", true),
                             Form::input_col(
                               // Form::wysiwyg("bos_action_status_descr")
                               Form::checkboxes("bos_action",

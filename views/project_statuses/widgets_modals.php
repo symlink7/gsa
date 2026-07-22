@@ -85,7 +85,7 @@ function modal_update_content($project_info, $status_info, $edit = false) {
         <div class="form-group clear">
       '.
       Form::label("status_action_date",
-        "When does this go to the board?", "false" 
+        "When does this go to the board?", false 
       ).
       Form::input_col(
         Form::date_field("status_action_date", $status_info["status_action_date"])
