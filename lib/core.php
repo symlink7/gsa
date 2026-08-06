@@ -140,7 +140,7 @@ function format_date($date, $default = "N/A", $format = "m-d-y") {
 }
 
 function format_budget($str, $default = "N/A") {
-  return ($str ? money_format("%!.0i", $str) : $default);
+  return ($str ? ely_money_format("%!.0i", $str) : $default);
 }  
 
 function serialize_array($arr, $sep = "\n") {
@@ -299,7 +299,7 @@ function remove_element_by_value($val, $arr) {
   return $arr2;
 }
 
-function money_format($format, $number, $currency = 'USD') {
+function ely_money_format($format, $number, $currency = 'USD') {
   $fmt = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
   if (strpos($format, '.0') !== false) {
     $fmt->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);

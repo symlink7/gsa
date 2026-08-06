@@ -16,7 +16,7 @@
                 </div><!-- .sidebar-submenu -->
               </li>
               <li>
-                <a href="#" title="Statistics"><i class="glyph-icon icon-folder"></i><span>Statistics</span></a>
+                <a href="#" title="GSA Projects View"><i class="glyph-icon icon-folder"></i><span>GSA Projects View</span></a>
                 <div class="sidebar-submenu">
                   <ul>
                     <li><a href="index.php?q=projects/view_approved" title="All Approved Projects"><span>All Approved Projects</span></a></li>

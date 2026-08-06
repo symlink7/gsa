@@ -27,8 +27,8 @@ $db_fields = array(
 );  
 
 $permissions = array(
-  "add" => array("A", "S"),
-  "edit" => array("A", "S", "M"),
+  "add" => array("A", "PA", "S"),
+  "edit" => array("A", "PA", "S", "M"),
   // add permissions for methods as you add methods
 );
 

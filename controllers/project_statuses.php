@@ -57,7 +57,7 @@ class Project_statusesController extends Controller {
 
       // we might have project_id as $args[0]
       $project_id = ($args[0] ? $args[0] : 0);
-      if ($_SESSION["user_info"]["user_role"] == "A") {
+      if (in_array($_SESSION["user_info"]["user_role"], array("A", "PA"))) {
         // show all projects that have pending statuses
         $can_edit = 1;
         $can_approve = 1;
@@ -112,9 +112,7 @@ class Project_statusesController extends Controller {
       $can_edit = 0;
       $can_approve = 0;
 
-      if ($_SESSION["user_info"]["user_role"] == "A"
-         || $_SESSION["user_info"]["user_role"] == "S" // S-UPDATE-ALL    
-      ) {
+      if (in_array($_SESSION["user_info"]["user_role"], array("A", "PA", "S"))) {
         // show all projects that have pending statuses
         $can_update = 1;
         $tudo = $this->{$this->_model_name}->expired_statuses();

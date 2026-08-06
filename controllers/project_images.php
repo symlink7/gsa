@@ -217,7 +217,7 @@ class Project_imagesController extends Controller {
   } // error_messages()
 
   private function has_permissions2() {
-    return (($_SESSION["user_info"]["user_role"] != "A" &&
+    return ((!in_array($_SESSION["user_info"]["user_role"], array("A", "PA")) &&
       (
         ($_SESSION["user_info"]["user_role"] == "M" &&
         $this->project_info["project_manager"] != $_SESSION["user_id"])

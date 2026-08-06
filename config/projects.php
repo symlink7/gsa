@@ -40,16 +40,16 @@ $db_fields = array(
 );
 
 $permissions = array(
-  "add" => array("A", "S"),
-  "view_all" => array("A", "S", "M"),
-  "view_mine" => array("A", "S", "M"),
-  "view_approved" => array("A", "S", "M", "D"),
-  "export_all" => array("A", "S", "M"),
+  "add" => array("A", "PA", "S"),
+  "view_all" => array("A", "PA", "S", "M"),
+  "view_mine" => array("A", "PA", "S", "M"),
+  "view_approved" => array(),
+  "export_all" => array("A", "PA", "S", "M"),
   "details" => array(),
-  "edit" => array("A", "S", "M"),
-  "delete" => array("A"),
-  "archive" => array("A", "S"),
-  "api_status" => array("A"),
+  "edit" => array("A", "PA", "S", "M"),
+  "delete" => array("A", "PA"),
+  "archive" => array("A", "PA", "S"),
+  "api_status" => array("A", "PA"),
   // add permissions for methods as you add methods
 );
 

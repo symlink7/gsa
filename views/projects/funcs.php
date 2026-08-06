@@ -47,7 +47,7 @@ class ProjectFuncs {
     }
   }
   public static function format_budget($str, $default = "N/A") {
-    return ($str ? money_format("%!.0i", $str) : $default);
+    return ($str ? ely_money_format("%!.0i", $str) : $default);
   }  
 
   public static function building_info($building, $sep = " | ") {

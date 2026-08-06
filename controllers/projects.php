@@ -621,7 +621,7 @@ class ProjectsController extends Controller {
         break;
       }
     }
-    if ($_SESSION["user_info"]["user_role"] == "A") {
+    if (in_array($_SESSION["user_info"]["user_role"], array("A", "PA"))) {
       $can_edit = 1;
       $can_update = 1;
       $can_approve = ($approval_needed ? 1 : 0);

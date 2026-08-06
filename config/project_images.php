@@ -17,10 +17,10 @@ $db_fields = array(
 );
 
 $permissions = array(
-  "for_project" => array("A", "M", "S"),
-  "update" => array("A", "M", "S"),
-  "delete" => array("A", "M", "S"),
-  "infeed" => array("A", "M", "S"), 
+  "for_project" => array("A", "PA", "M", "S"),
+  "update" => array("A", "PA", "M", "S"),
+  "delete" => array("A", "PA", "M", "S"),
+  "infeed" => array("A", "PA", "M", "S"), 
 );  
 
 $image_settings = array(

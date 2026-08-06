@@ -31,13 +31,13 @@ $db_fields = array(
 );  
 
 $permissions = array(
-  "add" => array("A", "S"),
-  "edit" => array("A", "S"),
+  "add" => array("A", "PA", "S"),
+  "edit" => array("A", "PA", "S"),
   // S-UPDATE-ALL : added S in for_project & update
-  "for_project" => array("A", "M", "S"), // update status for project
-  "update" => array("A", "M", "S"),
-  "pending" => array("A", "S", "M"), // projects awaiting approval
-  "approve" => array("A", "S"), 
+  "for_project" => array("A", "PA", "M", "S"), // update status for project
+  "update" => array("A", "PA", "M", "S"),
+  "pending" => array("A", "PA", "S", "M"), // projects awaiting approval
+  "approve" => array("A", "PA", "S"), 
   "delete" => array(),
   // add permissions for methods as you add methods
 );

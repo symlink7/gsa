@@ -16,7 +16,7 @@ $db_fields = array(
   $var_pfx."phone" => array("varchar", 24, "Phone", 1, 1),
   $var_pfx."email" => array("varchar", 128, "Email", 1, 1),
   $var_pfx."password" => array("varchar", 128, "Password", 0, 0, "password"),
-  $var_pfx."role" => array("set", "'A','M','S','D'", "Role", 1, 1, "M"),
+  $var_pfx."role" => array("set", "'A','PA','M','S','D'", "Role", 1, 1, "M"),
   $var_pfx."project_type" => array("varchar", 32, "Project Type", 1, 1),
   $var_pfx."deleted" =>array("set", "'Y','N'", "Deleted", 0, 0, "N"),
 
@@ -24,6 +24,7 @@ $db_fields = array(
 
 $user_role_options = array(
   "M" => "Project Manager",
+  "PA" => "Project Admin",
   "A" => "Admin",
   "S" => "Approver",
   "D" => "Director",
