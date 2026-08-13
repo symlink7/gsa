@@ -114,7 +114,7 @@ header("Content-type: application/x-msdownload; charset=utf-8");
 header("Content-Disposition: attachment; filename=".
   (is_var_valid($filename) ? "$filename-".date("Y-m-d") : 
                              "projects-".date("Y-m-d")
-  )."-$enc.csv");
+  )."-$enc.xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 echo $str;
