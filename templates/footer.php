@@ -16,7 +16,7 @@
 
 <!-- Bootstrap Progress Bar -->
 
-<script type="text/javascript" src="assets/widgets/progressbar/progressbar.js"></script>
+<!--<script type="text/javascript" src="assets/widgets/progressbar/progressbar.js"></script>-->
 
 <!-- Bootstrap Buttons -->
 

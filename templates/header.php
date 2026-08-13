@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <style>
@@ -91,7 +91,7 @@
 <link rel="stylesheet" type="text/css" href="assets/widgets/noty-notifications/noty.css">
 <link rel="stylesheet" type="text/css" href="assets/widgets/popover/popover.css">
 <link rel="stylesheet" type="text/css" href="assets/widgets/pretty-photo/prettyphoto.css">
-<link rel="stylesheet" type="text/css" href="assets/widgets/progressbar/progressbar.css">
+<!--<link rel="stylesheet" type="text/css" href="assets/widgets/progressbar/progressbar.css">-->
 <link rel="stylesheet" type="text/css" href="assets/widgets/range-slider/rangeslider.css">
 <link rel="stylesheet" type="text/css" href="assets/widgets/slidebars/slidebars.css">
 <link rel="stylesheet" type="text/css" href="assets/widgets/slider-ui/slider.css">
