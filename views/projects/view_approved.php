@@ -204,8 +204,12 @@ setlocale(LC_MONETARY, 'en_US');
       jQuery.plot('#clients-donut', dataSetc, {
         series: {
           pie: {
-            show: true
-          },
+            show: true,
+            combine: {
+              threshold: 0.005,
+              label: "Other",
+            }
+          }
         },
         tooltip: true,
         tooltipOpts: {
