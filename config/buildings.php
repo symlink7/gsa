@@ -14,6 +14,7 @@ $db_fields = array(
   $var_pfx."city" => array("varchar", 24, "City", 1, 1),
   $var_pfx."zip" => array("varchar", 10, "Zipcode", 1, 1),
   $var_pfx."type" => array("varchar", 24, "Property Type", 1, 1),
+  $var_pfx."old" => array("boolean", "", "Old only", 1, 1)
 );
 
 $permissions = array(

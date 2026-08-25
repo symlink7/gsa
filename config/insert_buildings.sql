@@ -1,6 +1,5 @@
-
-use db170385_gsa;
-insert into buildings values 
+#use db170385_gsa;
+#insert into buildings values 
 ('1050', '2233 SHORELINE DR', 'ALAMEDA', 'COURT'), 
 ('1015', '1320 HARBOR BAY PKWY, SUITE 145', 'ALAMEDA', 'OFF BLDG'), 
 ('1065', '2325 CLEMENT AVENUE, STE B', 'ALAMEDA', 'CLINIC'), 

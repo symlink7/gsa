@@ -306,3 +306,7 @@ function ely_money_format($format, $number, $currency = 'USD') {
   }
   return $fmt->formatCurrency($number, $currency);
 }
+
+function format_building_num($str) {
+  return sprintf("%05d", $str);
+}
