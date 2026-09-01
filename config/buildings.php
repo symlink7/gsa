@@ -4,15 +4,17 @@ $table = "buildings";
 $var_pfx = "build_";
 $primkey = $var_pfx."number";
 
-$descr_field = "concat($primkey, ': ', ".
-               "{$var_pfx}address, ', ', {$var_pfx}city)";
+$descr_field = "concat(". //$primkey, ': ', ".
+               "{$var_pfx}address, ', ', {$var_pfx}city, ".
+               "if(build_old, ' (OLD)', '')".
+               ")";
 $order_by = $var_pfx."number";
 
 $db_fields = array(
   $primkey => array("int not null", "", "Building Number", 0, 0, "primary"),
   $var_pfx."address" => array("varchar", 64, "Address", 1, 1),
   $var_pfx."city" => array("varchar", 24, "City", 1, 1),
-  $var_pfx."zip" => array("varchar", 10, "Zipcode", 1, 1),
+#  $var_pfx."zip" => array("varchar", 10, "Zipcode", 1, 1),
   $var_pfx."type" => array("varchar", 24, "Property Type", 1, 1),
   $var_pfx."old" => array("boolean", "", "Old only", 1, 1)
 );

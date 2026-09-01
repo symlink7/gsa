@@ -51,6 +51,9 @@ foreach ($tudo as $project) {
       }
       else if ($varname == "project_category") {
         $line[] = '"'.$project_category_options[$project[$varname]].'"';
+      } 
+      else if ($varname == "project_building") {
+        $line[] = '"'.format_building_num($project[$varname]).'"';
       }  
       else {
         $line[] = prepare_field(

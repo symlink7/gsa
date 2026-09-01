@@ -94,7 +94,7 @@ extract($colors);
                     <h5>
                     <? 
                     echo ($project_building ? 
-                      'Building #'.$project_building.
+                      'Building #'.format_building_num($project_building).
                       (is_arr_valid($building) ? 
                         "<br />". 
                         ProjectFuncs::building_info(
@@ -230,7 +230,7 @@ extract($colors);
                   <div class="layout-box blue-border">
                     <h5 class="pad10B">
                       <i class="glyph-icon icon-status-light-blue icon-check-square-o" title=".icon-check-square-o"></i>
-                      Projects in Building #<?=$project_building?>
+                      Projects in Building #<?=format_building_num($project_building)?>
                     </h5>
                     <p class="project-in-building">
                     <? foreach ($related_projects as $arr) { ?>

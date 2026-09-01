@@ -19,7 +19,8 @@ setlocale(LC_MONETARY, 'en_US');
                 
               <div class="row">
                 <div class="col-md-6">
-                  <h4 class="pad10B">All Projects for Building #<?=$building_num?></h4>
+                  <h4 class="pad10B">All Projects for Building
+                  #<?=format_building_num($building_num)?></h4>
                 </div><!-- col-md-6 -->
               </div><!-- row -->
               

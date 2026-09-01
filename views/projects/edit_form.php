@@ -1,4 +1,5 @@
 <? 
+require_once(VIEWS."projects/funcs.php");
 include(TEMPLATES."general_wrap.php"); 
 include(TEMPLATES."widgets/chosen.html");
 include(TEMPLATES."widgets/input_mask.html");

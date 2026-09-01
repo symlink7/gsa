@@ -886,7 +886,9 @@ class Project extends Model {
     }
     
     while ($row = mysql_fetch_assoc($res)) {
-      $tudo[] = strip($row);
+      $row = strip($row);
+      $row["build_num"] = format_building_num($row["build_num"]);
+      $tudo[] = $row;
     }
     
     return $tudo;
@@ -904,7 +906,7 @@ class Project extends Model {
       p.project_name, p.project_number, p.project_descr,
       p.project_type, p.project_delivery_method,
       p.project_building as build_num,
-      bld.build_address, bld.build_city, bld.build_zip,
+      bld.build_address, bld.build_city, 
       cz.project_city, cz.project_zip,
       p.project_department as dep_id,
       dep.dep_name as dep_name, 
@@ -980,14 +982,16 @@ class Project extends Model {
 
     include(CONFIG."projects.php");
     while ($row = mysql_fetch_assoc($res)) {
-      $dm = strip($row["project_delivery_method"]);
+      $row = strip($row);
+      $row["build_num"] = format_building_num($row["build_num"]);
+      $dm = $row["project_delivery_method"];
       if (array_key_exists($dm, $delivery_method_options)) {
         $row["project_delivery_method"] = $delivery_method_options[$dm];
       }  
       $row["images"] = (is_var_valid($row["images"]) ? 
         $this->public_images($row["images"]) : array()
       ); 
-      $tudo[] = strip($row);
+      $tudo[] = $row;
     }
 
     return $tudo;

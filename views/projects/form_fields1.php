@@ -1,4 +1,3 @@
-                          
                           <div class="form-group" style="border-top:0px;">
                             <label class="col-sm-3 control-label" id="project_name_req">Project Name <span style="color:red">*</span></label>
                             <div class="col-sm-6">
@@ -11,7 +10,8 @@
                             Form::label("project_building", "Building Number"),
                             Form::input_col(
                               Form::select_from_id_name_array(
-                                "project_building", $buildings 
+                                "project_building", 
+                                ProjectFuncs::prepare_buildings_arr($buildings)
                               )
                             )
                           );  

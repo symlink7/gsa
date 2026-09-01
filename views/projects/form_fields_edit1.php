@@ -1,4 +1,5 @@
-                          <?
+<?
+
                           echo Form::row(
                             Form::label("project_name", "Project Name", true),
                             Form::input_col(
@@ -11,7 +12,8 @@
                             Form::label("project_building", "Building Number"),
                             Form::input_col(
                               Form::select_from_id_name_array(
-                                "project_building", $buildings, 
+                                "project_building", 
+                                ProjectFuncs::prepare_buildings_arr($buildings),
                                 $project_building
                               )
                             )

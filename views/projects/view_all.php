@@ -42,7 +42,7 @@ include(TEMPLATES."widgets/data_tables.html");
                                 <a href="index.php?q=projects/details/<?=$project_id?>"><?=$project_name?></a>
                               </td>
                               <td><?=($project_number ? $project_number : "")?></td>
-                              <td><?=($project_building ? $project_building : "")?></td>
+                              <td><?=($project_building ? format_building_num($project_building) : "")?></td>
                               <td><?=$project_type?></td>
                               <td><?=$dep_name?></td>
                               <td><?=$client_list?></td>

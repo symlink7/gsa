@@ -17,7 +17,7 @@
                         <? foreach ($published as $project) { ?>
                           <a href="index.php?q=projects/details/<?=$project["project_id"]?>" class="list-group-item"><?=$project["project_name"].($project["project_building"] ? 
                             ' — <span class="text-transform-upr font-size-10">'.
-                            $project["project_building"].'</span>' : ""
+                            format_building_num($project["project_building"]).'</span>' : ""
                           )?><span class="badge bg-<?=$project["status_color"]?>"><i class="glyph-icon icon-status-<?=$project["status_color"]?>"></i></span>
                             <span class="badge bg-gray font-black font-none"><?=($project["status_needs_update"] == "Y" ? "Needs Update" : ($project["status_approved"] == "N" ? "Pending" : "Approved"))?></span></a>
                        <? } ?>
@@ -42,7 +42,7 @@
                           $draft["project_name"].
                           ($draft["project_building"] ?
                             ' — <span class="text-transform-upr font-size-10">'.
-                            $draft["project_building"].'</span>' : ""
+                            format_building_num($draft["project_building"]).'</span>' : ""
                           ).'</a>
                           ';
                         } 

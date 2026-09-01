@@ -50,7 +50,7 @@ extract($colors);
                     <h2><strong><?=$project_name?></strong></h2>
                     <p class="font-size-13 pad10B">
                     <? echo ($project_building ? 'Building #'.
-                    $project_building.
+                    format_building_num($project_building).
                     (is_arr_valid($building) ? 
                     ": ". ProjectFuncs::building_info($building) : "") 
                     : ""); // if $project_building

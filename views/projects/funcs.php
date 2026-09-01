@@ -116,5 +116,12 @@ class ProjectFuncs {
     }  
   } // prepare_critical_activity()
 
+  public static function prepare_buildings_arr($buildings) {
+    for($i = 0; $i < sizeof($buildings); $i++) {
+      $buildings[$i]["name"] = format_building_num($buildings[$i]["id"]).
+        ": ".$buildings[$i]["name"];
+    }
+    return $buildings;
+  }
 } // ProjectFuncs  
 ?>

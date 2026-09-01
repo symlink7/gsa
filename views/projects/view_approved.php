@@ -238,8 +238,8 @@ setlocale(LC_MONETARY, 'en_US');
         $set[] = '
         { 
           building: "<a href=\"index.php?q=projects/view_approved_by_building/'.
-          $building.'\">#'.$building.'</a>",
-          building_num: "#'.$building.'",
+          $building.'\">#'.format_building_num($building).'</a>",
+          building_num: "#'.format_building_num($building).'",
           budget: '.$budget.' 
         }';
       }

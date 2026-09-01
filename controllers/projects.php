@@ -17,7 +17,7 @@ class ProjectsController extends Controller {
         $this->set_var("project_id", $project_id);
       }
       if ($step == 1) {
-        $this->get_step1_data();
+        $this->get_step1_data("add");
       } 
       if ($step < 5) {
         $this->set_var("step", $step);
@@ -166,13 +166,17 @@ class ProjectsController extends Controller {
     $this->render();
   } // add()
 
-  private function get_step1_data() {
+  private function get_step1_data($ref) {
     // grab departments, clients, managers, supervisors
     $this->set_var("departments", DB::get_id_name(
       array("model" => "departments", "order" => "dep_name")
     )); 
     $this->set_var("buildings", DB::get_id_name(
-      array("model" => "buildings", "order" => "build_number")
+      array(
+        "model" => "buildings", 
+        "order" => "build_number",
+        "where" => ($ref == "add" ? array("build_old != 1") : array()),
+      )
     ));  
     $this->set_var("clients", DB::get_id_name(
       array("model" => "clients")
@@ -447,7 +451,7 @@ class ProjectsController extends Controller {
             $step = ((int)$step > 3 || (int)$step < 1 ? 1 : $step);
           
             if ($step == 1) {
-              $this->get_step1_data();
+              $this->get_step1_data("edit");
               /*
               $tudo = array_merge($tudo, 
                 $this->{$this->_model_name}->project_info(
