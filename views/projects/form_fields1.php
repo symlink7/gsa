@@ -40,18 +40,79 @@
                             )
                           );
                           sort($project_type_options);
+                          $gbo_types = get_var(
+                            "gbo_project_type_options",
+														"project_gbo"
+                          );
                           echo Form::row(
                             Form::label("project_type",
                               "Project Type", true),
                             Form::input_col(
                               Form::select_from_array(
-                                "project_type", $project_type_options
+                                "project_type", $project_type_options,
+                                "", "chosen-select", // default options
+                                // array $extras
+                                array(
+                                  "special_options" => $gbo_types,
+                                  "option_class" => "gbo"
+                                )
                               )
                             )  
                           );
-
                           ?>
+                          <? 
+                          $hidden = ' style="display:none"';
+                          ?>
+                          <div id="gbo-applies" class="form-group gbo-field"<?=$hidden?>>
+                            <?
+                            $project_gbo_applies_options = 
+                              get_var("project_gbo_applies_options", "project_gbo");
+
+                            echo Form::label(
+															"project_gbo_applies", 
+															"Do any sections of Green Building Ordinance apply?",
+															true
+														).
+														Form::input_col(Form::select_from_rel_array(
+                            	"project_gbo_applies", $project_gbo_applies_options
+														));
+                            ?>
+                          </div><!-- form group -->
+              
+                          <div id="gbo-seeking-weaver" class="form-group gbo-field"<?=$hidden?>>
+                            <?
+                            $project_seeking_weaver_options =
+                              get_var("project_seeking_weaver_options", "project_gbo");
+
+                            echo Form::label(
+                              "project_seeking_weaver",
+                              "Is project seeking a waiver?",
+                              true
+                            ).
+                            Form::input_col(Form::select_from_rel_array(
+                              "project_seeking_weaver", 
+                              $project_seeking_weaver_options
+                            ));
+                            ?>
+                          </div><!-- form group -->
                           
+                          <div id="gbo-cat" class="form-group gbo-field"<?=$hidden?>>
+                            <?
+                            $project_gbo_cat_options = 
+                              get_var("project_gbo_cat_options", "project_gbo");
+
+                              echo Form::label(
+                                "project_gbo_cat", 
+                                "Identify Project Category", 
+                                true
+                              ).
+                              Form::input_col(Form::select_from_rel_array(
+                                "project_gbo_cat",
+                                $project_gbo_cat_options
+                              ));
+                            ?>
+                          </div><!-- form group -->
+
                           <div class="form-group">
                             <label class="col-sm-3 control-label">Add Joint Clients</label>
                             <div class="col-sm-6">

@@ -96,7 +96,11 @@ class Form {
   } // select_from_rel_array()    
   
   public static function select_from_array($varname, $options, $val = "",
-                                 $class = "chosen-select") {
+                          $class = "chosen-select", $extras = array()) {
+    // extras should contain array special_options and variable option_class
+    if (is_arr_valid($extras)) {
+      extract($extras);
+    } 
     $str = '
       <select name="'.$varname.'" class="'.$class.'">
         <option value=""></option>
@@ -106,6 +110,8 @@ class Form {
         $str .= '
         <option value="'.htmlspecialchars($value).'"'.
           ($val != "" && $value == $val ? " selected" : "").
+          (is_arr_valid($special_options) && in_array($value, $special_options) ?
+          ' class="'.htmlspecialchars($option_class).'"' : "").
         '>'.htmlspecialchars($value).'
         </option>';
       }

@@ -1,6 +1,7 @@
 <?
 
 $sections = array(
+/*
   "users", "clients",
   "projects", "clients_for_projects",
   "project_budgets", "project_details",
@@ -9,6 +10,8 @@ $sections = array(
   "project_statuses_archive",
   "buildings", "project_images",
   "project_api_status", "city_zips",
+*/
+  "project_gbo"
 );  
 
 for ($i = 0; $i < sizeof($sections); $i++){
