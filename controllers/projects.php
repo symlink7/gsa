@@ -47,9 +47,11 @@ class ProjectsController extends Controller {
     if ($step == 1) {
       // prepare the special variables
       $vars = $this->{$this->_model_name}->before_validation($_POST);      
-      
+     
+      $gbo_req = $this->check_gbo($vars);
+
       // validate the standard way
-      if ($this->validate_add_form($vars) == 0) {
+      if ($this->validate_add_form($vars, 1, $gbo_req) == 0) {
         $this->die_ajax();
       }
       
@@ -430,7 +432,7 @@ class ProjectsController extends Controller {
         }  
         else {
           $tudo = $this->{$this->_model_name}->project_info(
-            $project_id, array("projects", "details"));
+            $project_id, array("projects", "gbo", "details"));
           if (sizeof($tudo) < 1) {
             $error_msg = $this->{$this->_model_name}->get_error_msg();
           }  
@@ -532,6 +534,8 @@ class ProjectsController extends Controller {
     $vars = ($step == 1 ? 
       $this->{$this->_model_name}->before_validation($_POST) : $_POST);
     
+    $more_req = ($step == 1 ? $this->check_gbo($vars) : array());
+
     include(CONFIG.$this->_controller_name.".php");
     
     $model = ($step == 1 ? 
@@ -540,7 +544,7 @@ class ProjectsController extends Controller {
               );
 
     if ($this->validate_project_edit_form(
-        $vars, $step_controllers[$step]) == 0
+        $vars, $step_controllers[$step], $more_req) == 0
       ) {
       $this->die_ajax();
     }
@@ -581,7 +585,8 @@ class ProjectsController extends Controller {
     }
   }
 
-  function validate_project_edit_form($vars, $section) {
+  function validate_project_edit_form($vars, $section, 
+                                      $additional_req_fields = array()) {
     $errors = array();
     $missing = array();
 
@@ -592,6 +597,16 @@ class ProjectsController extends Controller {
       $this->set_var("errors", array("Couldn't find configuration file."));
       $this->set_var("missing", $missing);
       return 0;
+    }
+
+    if (is_arr_valid($additional_req_fields)) {
+      if (is_arr_valid($edit_form_req_fields)) {
+        $edit_form_req_fields =
+          array_merge($edit_form_req_fields, $additional_req_fields);
+      }
+      else {
+        $edit_form_req_fields = $additional_req_fields;
+      }
     }
 
     if (is_arr_valid($edit_form_req_fields)) {
@@ -838,5 +853,23 @@ class ProjectsController extends Controller {
     $this->set_var("public_projects", $this->{$this->_model_name}->get_api_projects($version));
     $this->render();
   } // bulk_api_status()
+
+  private function check_gbo($vars) {
+    $gbo_req = array();
+    $gbo_types = get_var("gbo_project_type_options", "project_gbo");
+    if (is_var_valid($vars["project_type"]) && 
+      in_array($vars["project_type"], $gbo_types)) {
+      $gbo_req[] = "project_gbo_applies";
+      if (is_var_valid($vars["project_gbo_applies"]) &&
+        $vars["project_gbo_applies"] == "Y") {
+        $gbo_req[] = "project_seeking_waiver";
+        if (is_var_valid($vars["project_seeking_waiver"]) &&
+          $vars["project_seeking_waiver"] == "N") {
+            $gbo_req[] = "project_gbo_cat";
+        }
+      }
+    }
+    return $gbo_req;
+  }  
 
 } // class Projects  

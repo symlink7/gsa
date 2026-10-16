@@ -42,7 +42,7 @@
                           sort($project_type_options);
                           $gbo_types = get_var(
                             "gbo_project_type_options",
-														"project_gbo"
+                            "project_gbo"
                           );
                           echo Form::row(
                             Form::label("project_type",
@@ -69,29 +69,29 @@
                               get_var("project_gbo_applies_options", "project_gbo");
 
                             echo Form::label(
-															"project_gbo_applies", 
-															"Do any sections of Green Building Ordinance apply?",
-															true
-														).
-														Form::input_col(Form::select_from_rel_array(
-                            	"project_gbo_applies", $project_gbo_applies_options
-														));
+                              "project_gbo_applies", 
+                              "Do any sections of Green Building Ordinance apply?",
+                              true
+                            ).
+                            Form::input_col(Form::select_from_rel_array(
+                              "project_gbo_applies", $project_gbo_applies_options
+                            ));
                             ?>
                           </div><!-- form group -->
               
-                          <div id="gbo-seeking-weaver" class="form-group gbo-field"<?=$hidden?>>
+                          <div id="gbo-seeking-waiver" class="form-group gbo-field"<?=$hidden?>>
                             <?
-                            $project_seeking_weaver_options =
-                              get_var("project_seeking_weaver_options", "project_gbo");
+                            $project_seeking_waiver_options =
+                              get_var("project_seeking_waiver_options", "project_gbo");
 
                             echo Form::label(
-                              "project_seeking_weaver",
+                              "project_seeking_waiver",
                               "Is project seeking a waiver?",
                               true
                             ).
                             Form::input_col(Form::select_from_rel_array(
-                              "project_seeking_weaver", 
-                              $project_seeking_weaver_options
+                              "project_seeking_waiver", 
+                              $project_seeking_waiver_options
                             ));
                             ?>
                           </div><!-- form group -->

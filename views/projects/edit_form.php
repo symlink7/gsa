@@ -10,6 +10,7 @@ include(TEMPLATES."widgets/ckeditor.html");
 ?>
 <!-- ely's form submit script -->
 <script type="text/javascript" src="platform/js/forms_submit.js"></script>
+<script type="text/javascript" src="platform/js/gbo.js"></script>
 <? 
 extract($tudo); 
 ?>

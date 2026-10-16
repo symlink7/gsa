@@ -41,6 +41,14 @@ class Project extends Model {
         }
       } 
     }  
+    
+    // eventually insert gbo
+    $resp = $this->insert_gbo(escape($vars));
+    if ($resp != "") {
+      $this->set_error_msg($resp);
+      return 0;
+    }  
+
     // if we got this far without returning, we're good      
     return 1;
   } // end of add()
@@ -276,6 +284,9 @@ class Project extends Model {
         p.project_district,
         p.project_type,
         p.project_department,
+        gbo.project_gbo_applies,
+        gbo.project_seeking_waiver,
+        gbo.project_gbo_cat,
         d.dep_name,
         b.budget_approved_orig,
         b.budget_approved_revised,
@@ -288,6 +299,8 @@ class Project extends Model {
                      SEPARATOR '; '
         ) as client_list
       FROM projects AS p
+      LEFT JOIN project_gbo as gbo
+      on p.project_id=gbo.project_id
       LEFT JOIN project_budgets as b
       ON p.project_id=b.project_id
       LEFT JOIN project_details as pd
@@ -349,6 +362,10 @@ class Project extends Model {
     else {
       $tudo = $project_info[0];
       // get the other info
+      $tudo = array_merge($tudo, DB::get_fields(array(
+        "model" => "project_gbo",
+        "where" => $where,
+      ), true));  
       $tudo = array_merge($tudo, DB::get_fields(array(
         "model" => "project_budgets",
         "where" => $where,
@@ -449,7 +466,7 @@ class Project extends Model {
     return $tudo;
   } // details
 
-  private function get_client_list($project_id) {
+  function get_client_list($project_id) {
     $str = "";
     $query = "
       SELECT 
@@ -531,6 +548,14 @@ class Project extends Model {
       else {
         $tudo = $project_info[0];
       }
+    }
+    if (in_array("gbo", $sections)) {
+      $tudo = array_merge($tudo,
+          DB::get_fields(array(
+          "model" => "project_gbo",
+          "where" => $where,
+        ), true)
+      );
     }
     if (in_array("budgets", $sections)) {
       $tudo = array_merge($tudo, 
@@ -615,6 +640,21 @@ class Project extends Model {
         }
       }
     }
+
+    // eventually insert/update gbo
+    $query = "DELETE FROM project_gbo 
+              WHERE project_id='".mysql_escape_string($this->_id)."'";
+    if (!mysql_query($query)) {
+      $this->set_error_msg(mysql_error());
+      return 0;
+    }
+
+    $resp = $this->insert_gbo(escape($vars));
+    if ($resp != "") {
+      $this->set_error_msg($resp);
+      return 0;
+    }
+
     // if we got this far without returning, we're good      
     return 1;
   } // end of edit()
@@ -630,6 +670,17 @@ class Project extends Model {
     $query = "
       SELECT 
         p.*,
+				CONCAT(
+					'Green Building Ordinance ',
+					CASE 
+        		WHEN gbo.project_gbo_applies='Y' AND gbo.project_seeking_waiver='Y' 
+						THEN 'applies (Seeking Waiver)'
+        		WHEN gbo.project_gbo_applies='Y' AND gbo.project_seeking_waiver='N' 
+						THEN CONCAT('applies. Category: ||', gbo.project_gbo_cat)
+        		WHEN gbo.project_gbo_applies = 'N' THEN 'does not apply.'
+            WHEN gbo.project_gbo_applies = 'U' THEN 'undetermined if applies.'
+    			END
+				) AS gbo_status,
         d.dep_name,
         cl.client_name,
         p.project_id, 
@@ -641,6 +692,8 @@ class Project extends Model {
         pdates.*,
         pd.*
       FROM projects AS p
+			LEFT JOIN project_gbo as gbo
+			ON p.project_id=gbo.project_id
       LEFT JOIN clients_for_projects AS cp
       ON p.project_id=cp.project_id
       LEFT JOIN clients AS c
@@ -906,6 +959,9 @@ class Project extends Model {
       p.project_name, p.project_number, p.project_descr,
       p.project_type, p.project_delivery_method,
       p.project_building as build_num,
+      gbo.project_gbo_applies,
+      gbo.project_seeking_waiver,
+      gbo.project_gbo_cat,
       bld.build_address, bld.build_city, 
       cz.project_city, cz.project_zip,
       p.project_department as dep_id,
@@ -934,6 +990,8 @@ class Project extends Model {
       FROM project_api_status AS api
       LEFT JOIN projects AS p
       ON api.project_id = p.project_id
+      LEFT JOIN project_gbo as gbo
+      ON api.project_id = gbo.project_id
       LEFT JOIN clients_for_projects AS cp
       ON p.project_id=cp.project_id
       LEFT JOIN clients AS c
@@ -981,6 +1039,7 @@ class Project extends Model {
     }
 
     include(CONFIG."projects.php");
+    // $project_gbo_cat_options = get_var("project_gbo_cat_options", "project_gbo")
     while ($row = mysql_fetch_assoc($res)) {
       $row = strip($row);
       $row["build_num"] = format_building_num($row["build_num"]);
@@ -1013,5 +1072,20 @@ class Project extends Model {
     }  
     return $images;
   } // public_images()
+
+  function insert_gbo($vars) {
+    $resp = "";
+    $gbo_types = get_var("gbo_project_type_options", "project_gbo");
+    if (is_var_valid($vars["project_type"]) && 
+      in_array($vars["project_type"], $gbo_types)) {
+      $resp = DB::insert("project_gbo", array(
+        "project_id" => $this->_id,
+        "project_gbo_applies" => "'".$vars["project_gbo_applies"]."'",
+        "project_seeking_waiver" => "'".$vars["project_seeking_waiver"]."'",
+        "project_gbo_cat" => "'".$vars["project_gbo_cat"]."'"
+      ));
+    }
+    return $resp;
+  }
 
 } // class Project

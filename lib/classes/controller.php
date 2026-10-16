@@ -103,7 +103,8 @@ class Controller {
   } // edit()
 
 
-  protected function validate_add_form($vars, $check_permissions = 1) {
+  protected function validate_add_form($vars, $check_permissions = 1, 
+                                       $additional_req_fields = array()) {
     // checking for missing required fields
     $errors = array();
     $missing = array();
@@ -123,6 +124,15 @@ class Controller {
       return 0;
     }
 
+    if (is_arr_valid($additional_req_fields)) {
+      if (is_arr_valid($add_form_req_fields)) {
+        $add_form_req_fields = 
+          array_merge($add_form_req_fields, $additional_req_fields);
+      }
+      else {
+        $add_form_req_fields = $additional_req_fields;
+      }
+    }  
     if (is_arr_valid($add_form_req_fields)) {
       foreach ($add_form_req_fields as $varname) {
         if (!is_var_valid($vars[$varname])) {
@@ -189,7 +199,8 @@ class Controller {
     return 1;
   } // validate_sub_add_form
 
-  protected function validate_edit_form($vars, $check_permissions = 1) {
+  protected function validate_edit_form($vars, $check_permissions = 1,
+    $additional_req_fields = array()) {
     if (is_file(CONFIG.$this->_controller_name.".php")) {
       include(CONFIG.$this->_controller_name.".php");
     }
@@ -212,7 +223,7 @@ class Controller {
       return 0;
     }
     else {
-      return $this->validate_add_form($vars, 0);
+      return $this->validate_add_form($vars, 0, $additional_req_fields);
     }
   }
 

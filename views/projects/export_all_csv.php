@@ -54,7 +54,10 @@ foreach ($tudo as $project) {
       } 
       else if ($varname == "project_building") {
         $line[] = '"'.format_building_num($project[$varname]).'"';
-      }  
+      } 
+      else if ($varname == "gbo_status") {
+        $line[] = '"'.format_gbo_status($project[$varname]).'"';
+      }
       else {
         $line[] = prepare_field(
                     $project[$varname], 
@@ -145,4 +148,17 @@ function prepare_field($value, $specs, $enc = "UTF-8") {
   return $value;
 }
 
+function format_gbo_status($str) {
+  $project_gbo_cat_options = get_var("project_gbo_cat_options", "project_gbo");
+  $arr = explode("||", $str);
+  if ($arr > 0) {
+    $cat = trim($arr[1]);
+    if (array_key_exists($cat, $project_gbo_cat_options)) {
+      $arr[1] = $project_gbo_cat_options[$cat];
+    }
+    $str = implode("", $arr);
+  }
+  return $str;
+}  
+  
 ?>

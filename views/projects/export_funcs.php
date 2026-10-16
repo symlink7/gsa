@@ -5,7 +5,7 @@ class ExportFuncs {
     include(CONFIG."projects.php");
 
     $db_fields_all = $db_fields;
-    $sections = array("project_details", 
+    $sections = array("project_gbo", "project_details", 
       "project_dates", "project_budgets"); 
     foreach ($sections as $section) {
       include(CONFIG.$section.".php");
@@ -13,6 +13,7 @@ class ExportFuncs {
     }
 
     $db_fields = array(
+      "gbo_status" => array(0, 0, "Green Building Ordinance"),
       "dep_name" => $db_fields_all["project_department"],
       "client_name" => $db_fields_all["project_client_id"],
       "client_list" => array("text", "", "Joint Clients"),
@@ -42,7 +43,7 @@ class ExportFuncs {
   public static function get_fields() {
     $fields = array(
       "project_number", "project_name", "project_building",
-      "dep_name", "project_type", "client_name", "client_list", 
+      "dep_name", "project_type", "gbo_status", "client_name", "client_list", 
       "project_client_department", "project_client_contact",
       "project_district", "project_delivery_method",
       /***/  "budget_status_color", // "budget_status_descr",

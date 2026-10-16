@@ -89,7 +89,6 @@ class DB {
              VALUES
              (".implode(", ", $arr).")
              ";
-    
     if (!mysql_query($query)) {
       return "$query: ".mysql_error();
     }

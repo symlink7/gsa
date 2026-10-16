@@ -41,18 +41,84 @@
                             )
                           );
                           sort($project_type_options);
+                          $gbo_types = get_var(
+                            "gbo_project_type_options",
+                            "project_gbo"
+                          );
                           echo Form::row(
                             Form::label("project_type",
                               "Project Type", true),
                             Form::input_col(
                               Form::select_from_array(
-                                "project_type", $project_type_options,
-                                $project_type
+                                "project_type", 
+                                $project_type_options,
+                                $project_type, 
+                                "chosen-select", // default option
+                                // array $extras
+                                array(
+                                  "special_options" => $gbo_types,
+                                  "option_class" => "gbo"
+                                )
                               )
                             )  
                           );
-
                           ?>
+                          <? 
+                          $hidden = ' style="display:none"';
+                          ?>
+                          <div id="gbo-applies" class="form-group gbo-field"<?=$hidden?>>
+                            <?
+                            $project_gbo_applies_options = 
+                              get_var("project_gbo_applies_options", "project_gbo");
+
+                            echo Form::label(
+                              "project_gbo_applies", 
+                              "Do any sections of Green Building Ordinance apply?",
+                              true
+                            ).
+                            Form::input_col(Form::select_from_rel_array(
+                              "project_gbo_applies", 
+                              $project_gbo_applies_options,
+                              $project_gbo_applies
+                            ));
+                            ?>
+                          </div><!-- form group -->
+              
+                          <div id="gbo-seeking-waiver" class="form-group gbo-field"<?=$hidden?>>
+                            <?
+                            $project_seeking_waiver_options =
+                              get_var("project_seeking_waiver_options", "project_gbo");
+
+                            echo Form::label(
+                              "project_seeking_waiver",
+                              "Is project seeking a waiver?",
+                              true
+                            ).
+                            Form::input_col(Form::select_from_rel_array(
+                              "project_seeking_waiver", 
+                              $project_seeking_waiver_options,
+                              $project_seeking_waiver
+                            ));
+                            ?>
+                          </div><!-- form group -->
+                          
+                          <div id="gbo-cat" class="form-group gbo-field"<?=$hidden?>>
+                            <?
+                            $project_gbo_cat_options = 
+                              get_var("project_gbo_cat_options", "project_gbo");
+
+                              echo Form::label(
+                                "project_gbo_cat", 
+                                "Identify Project Category", 
+                                true
+                              ).
+                              Form::input_col(Form::select_from_rel_array(
+                                "project_gbo_cat",
+                                $project_gbo_cat_options,
+                                $project_gbo_cat
+                              ));
+                            ?>
+                          </div><!-- form group -->
 
                           <div class="form-group">
                             <?=Form::label("project_clients", 

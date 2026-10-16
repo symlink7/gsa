@@ -34,6 +34,22 @@ $tudo["project_category"] =
 
 extract($tudo);
 
+$gbo_types = get_var("gbo_project_type_options", "project_gbo");
+$project_gbo_cat_options = get_var("project_gbo_cat_options", "project_gbo");
+$gbo_status = "";
+if (in_array($project_type, $gbo_types)) {
+  if (in_array($project_gbo_applies, array('Y', 'N'))) {
+    $gbo_status = "Green Building Ordinance ".
+      ($project_gbo_applies == "Y" ? "applies".
+        ($project_seeking_waiver == "Y" ? " (Seeking Waiver)" :
+          (in_array($project_gbo_cat, $project_gbo_cat_options) ?
+            "Category: ".$project_gbo_cat_options[$project_gbo_cat] : ""
+          )
+        )
+        : "does not apply."
+      );
+  }
+}
 $colors = ProjectFuncs::status_colors($statuses);
 extract($colors);
 
